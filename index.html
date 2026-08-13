@@ -1,0 +1,767 @@
+from pathlib import Path
+
+html = r'''<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Arbeitsproben – Learning Design, interaktive Lernmedien, technische Umsetzung und Visualisierung">
+  <title>Julia Fleischer · Learning Design Portfolio</title>
+
+  <!-- Bootstrap 5.3.8 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous">
+
+  <style>
+    :root {
+      --bg: #111111;
+      --surface: #181818;
+      --surface-2: #202020;
+      --text: #f1eee9;
+      --muted: #aaa59f;
+      --line: rgba(255,255,255,.12);
+      --accent: #c9a36b;
+      --accent-soft: rgba(201,163,107,.14);
+      --max-width: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 85% 10%, rgba(201,163,107,.08), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container-xl {
+      max-width: var(--max-width);
+    }
+
+    .navbar {
+      background: rgba(17,17,17,.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar-brand {
+      color: var(--text);
+      font-size: .95rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .navbar-brand:hover,
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .hero {
+      min-height: 76vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 5rem;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin-top: 1rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.1rem, 8vw, 7.2rem);
+      font-weight: 400;
+      line-height: .95;
+      letter-spacing: -.045em;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin-top: 2rem;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+    }
+
+    .hero-meta {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+    }
+
+    .meta-pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .5rem .85rem;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    section {
+      padding: 6.5rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin: .7rem 0 1rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .section-intro {
+      max-width: 720px;
+      color: var(--muted);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin: 2.4rem 0 2rem;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      padding: .55rem .95rem;
+      transition: .2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    .portfolio-card {
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: var(--surface);
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,163,107,.55);
+    }
+
+    .preview {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.04), transparent),
+        var(--surface-2);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .preview strong {
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .category {
+      color: var(--accent);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      margin-top: .45rem;
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+    }
+
+    .card-text {
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .card-link {
+      display: inline-block;
+      margin-top: .5rem;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .card-link:hover {
+      color: var(--accent);
+    }
+
+    .principle {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .principle-number {
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.6rem;
+    }
+
+    .principle h3 {
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    .principle p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .tech-strip {
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: var(--surface);
+      padding: 1.5rem;
+    }
+
+    .tech-label {
+      color: var(--muted);
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .tech-value {
+      margin-top: .25rem;
+      font-size: 1rem;
+    }
+
+    .modal-content {
+      background: #181818;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .modal-header,
+    .modal-footer {
+      border-color: var(--line);
+    }
+
+    .btn-close {
+      filter: invert(1);
+    }
+
+    .project-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .project-fact {
+      border-top: 1px solid var(--line);
+      padding-top: .7rem;
+    }
+
+    .project-fact small {
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 3rem 0 4rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: .88rem;
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container-xl">
+      <a class="navbar-brand" href="#top">Julia Fleischer</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#portfolioNav" aria-controls="portfolioNav"
+              aria-expanded="false" aria-label="Navigation öffnen">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="portfolioNav">
+        <ul class="navbar-nav ms-auto gap-md-3">
+          <li class="nav-item"><a class="nav-link" href="#arbeiten">Arbeitsproben</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ansatz">Learning Design</a></li>
+          <li class="nav-item"><a class="nav-link" href="#technik">Technik</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="container-xl">
+        <div class="eyebrow">Learning Design · E-Learning · Visualisierung</div>
+        <h1>Lernen gestalten.<br>Inhalte begreifbar machen.</h1>
+        <p class="hero-copy">
+          Ausgewählte Arbeitsproben an der Schnittstelle von Didaktik,
+          interaktiven Lernmedien, technischer Umsetzung und visueller Kommunikation.
+        </p>
+
+        <div class="hero-meta" aria-label="Schwerpunkte">
+          <span class="meta-pill">Instructional Design</span>
+          <span class="meta-pill">Moodle &amp; H5P</span>
+          <span class="meta-pill">HTML · CSS · JavaScript</span>
+          <span class="meta-pill">Simulationen</span>
+          <span class="meta-pill">Adobe Illustrator</span>
+        </div>
+      </div>
+    </header>
+
+    <section id="arbeiten">
+      <div class="container-xl">
+        <div class="section-kicker">Portfolio</div>
+        <h2 class="section-title">Ausgewählte Arbeiten</h2>
+        <p class="section-intro">
+          Die Beispiele zeigen nicht nur Ergebnisse, sondern auch Lernziel,
+          didaktische Entscheidung, technische Umsetzung und meinen konkreten Beitrag.
+        </p>
+
+        <div class="filter-bar" role="group" aria-label="Arbeitsproben filtern">
+          <button class="filter-btn active" data-filter="all">Alle</button>
+          <button class="filter-btn" data-filter="didaktik">Didaktik</button>
+          <button class="filter-btn" data-filter="interaktiv">Interaktive Medien</button>
+          <button class="filter-btn" data-filter="simulation">Simulationen</button>
+          <button class="filter-btn" data-filter="grafik">Grafik</button>
+          <button class="filter-btn" data-filter="technik">Technik</button>
+        </div>
+
+        <div class="row g-4" id="portfolioGrid">
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="didaktik interaktiv technik">
+            <div class="portfolio-card">
+              <div class="preview">
+                <div>
+                  <strong>Lerneinheit</strong><br>
+                  Screenshot / Mockup später einsetzen
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="category">Didaktik · Interaktiv</div>
+                <h3 class="card-title">Software Engineering</h3>
+                <p class="card-text">
+                  Beispiel für die didaktische Aufbereitung eines fachlich komplexen
+                  Inhalts in einer digitalen Lernumgebung.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#projectModal"
+                   data-title="Software Engineering"
+                   data-type="Digitale Lerneinheit"
+                   data-role="Konzeption · Strukturierung · Umsetzung"
+                   data-tech="Moodle · H5P · HTML/CSS"
+                   data-description="Hier beschreiben wir später Lernziel, Ausgangslage, didaktische Entscheidung und die konkrete Umsetzung.">
+                  Projekt ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="didaktik interaktiv">
+            <div class="portfolio-card">
+              <div class="preview">
+                <div>
+                  <strong>Assessment</strong><br>
+                  Beispielaufgabe / Testlogik später einsetzen
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="category">Didaktik · Assessment</div>
+                <h3 class="card-title">Diagnostisches Lernen</h3>
+                <p class="card-text">
+                  Lernstandsdiagnostik und Aufgabenentwicklung als Bestandteil
+                  eines strukturierten Lernprozesses.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#projectModal"
+                   data-title="Diagnostisches Lernen"
+                   data-type="Assessment"
+                   data-role="Konzeption · Aufgabenentwicklung"
+                   data-tech="Testdesign · digitale Lernumgebung"
+                   data-description="Hier können später Beispielitems, Feedbacklogik und die didaktische Funktion des Assessments gezeigt werden.">
+                  Projekt ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="simulation interaktiv technik didaktik">
+            <div class="portfolio-card">
+              <div class="preview">
+                <div>
+                  <strong>Interaktive Simulation</strong><br>
+                  JavaScript-Demo später direkt hier einbetten
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="category">Simulation · JavaScript</div>
+                <h3 class="card-title">Lernen durch Exploration</h3>
+                <p class="card-text">
+                  Eine kleine Simulation, bei der Interaktion nicht Selbstzweck ist,
+                  sondern fachliche Zusammenhänge sichtbar macht.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#projectModal"
+                   data-title="Lernen durch Exploration"
+                   data-type="Interaktive Simulation"
+                   data-role="Konzept · Programmierung · didaktische Einbettung"
+                   data-tech="HTML · CSS · Vanilla JavaScript"
+                   data-description="Hier kann später eine echte kleine Simulation direkt in die Seite integriert werden.">
+                  Projekt ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="grafik didaktik">
+            <div class="portfolio-card">
+              <div class="preview">
+                <div>
+                  <strong>Visualisierung</strong><br>
+                  Illustrator-Grafik später einsetzen
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="category">Grafik · Visualisierung</div>
+                <h3 class="card-title">Komplexität sichtbar machen</h3>
+                <p class="card-text">
+                  Eigene fachliche Grafiken und visuelle Modelle als Bestandteil
+                  verständlicher Lernmaterialien.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#projectModal"
+                   data-title="Komplexität sichtbar machen"
+                   data-type="Fachvisualisierung"
+                   data-role="Konzeption · Gestaltung"
+                   data-tech="Adobe Illustrator"
+                   data-description="Hier zeigen wir später Originalgrafik, Einsatzkontext und gestalterische beziehungsweise didaktische Überlegungen.">
+                  Projekt ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="technik">
+            <div class="portfolio-card">
+              <div class="preview">
+                <div>
+                  <strong>Webentwicklung</strong><br>
+                  Das Portfolio selbst ist die Arbeitsprobe
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="category">Technik · Frontend</div>
+                <h3 class="card-title">Dieses Portfolio</h3>
+                <p class="card-text">
+                  Responsive Ein-Datei-Website mit Bootstrap, eigenem CSS
+                  und eigener JavaScript-Interaktion.
+                </p>
+                <a class="card-link" href="#technik">
+                  Technische Details
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="didaktik">
+            <div class="portfolio-card">
+              <div class="preview">
+                <div>
+                  <strong>Learning Design</strong><br>
+                  Kursstruktur / Lernpfad später einsetzen
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="category">Konzeption · Lernpfad</div>
+                <h3 class="card-title">Vom Lernziel zum Lernangebot</h3>
+                <p class="card-text">
+                  Beispiel für die Konzeption eines vollständigen Lernangebots
+                  von Zielgruppe und Lernziel bis zu Übung und Feedback.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#projectModal"
+                   data-title="Vom Lernziel zum Lernangebot"
+                   data-type="Learning Design"
+                   data-role="Didaktische Konzeption"
+                   data-tech="Lernzielanalyse · Strukturierung · Assessment"
+                   data-description="Hier kann später ein Brückenkurs oder eine andere konzeptionell starke Arbeitsprobe ausgearbeitet werden.">
+                  Projekt ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="ansatz">
+      <div class="container-xl">
+        <div class="row g-5">
+          <div class="col-lg-5">
+            <div class="section-kicker">Learning Design</div>
+            <h2 class="section-title">Nicht nur zeigen, was. Sondern warum.</h2>
+            <p class="section-intro">
+              Jede Arbeitsprobe soll die Verbindung zwischen fachlichem Inhalt,
+              Lernziel, didaktischer Entscheidung und Medium sichtbar machen.
+            </p>
+          </div>
+
+          <div class="col-lg-6 offset-lg-1">
+            <div class="principle row">
+              <div class="col-2 principle-number">01</div>
+              <div class="col-10">
+                <h3>Ausgangslage</h3>
+                <p>Was sollten Lernende verstehen oder können – und wo lag die Schwierigkeit?</p>
+              </div>
+            </div>
+
+            <div class="principle row">
+              <div class="col-2 principle-number">02</div>
+              <div class="col-10">
+                <h3>Didaktische Entscheidung</h3>
+                <p>Warum wurde genau diese Struktur, Aufgabe, Visualisierung oder Interaktion gewählt?</p>
+              </div>
+            </div>
+
+            <div class="principle row">
+              <div class="col-2 principle-number">03</div>
+              <div class="col-10">
+                <h3>Umsetzung</h3>
+                <p>Welche Werkzeuge und Technologien wurden eingesetzt und was war mein eigener Anteil?</p>
+              </div>
+            </div>
+
+            <div class="principle row">
+              <div class="col-2 principle-number">04</div>
+              <div class="col-10">
+                <h3>Wirkung</h3>
+                <p>Was verbessert die Lösung für Lernende – fachlich, visuell oder in der Bedienung?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="technik">
+      <div class="container-xl">
+        <div class="section-kicker">Technische Umsetzung</div>
+        <h2 class="section-title">Die Website ist selbst Teil der Arbeitsprobe.</h2>
+        <p class="section-intro mb-5">
+          Kein Website-Baukasten: responsives Layout, individuelle Gestaltung
+          und gezielte JavaScript-Interaktion in einer schlanken Struktur.
+        </p>
+
+        <div class="tech-strip">
+          <div class="row g-4">
+            <div class="col-6 col-lg-3">
+              <div class="tech-label">Struktur</div>
+              <div class="tech-value">Semantisches HTML5</div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="tech-label">Framework</div>
+              <div class="tech-value">Bootstrap 5</div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="tech-label">Design</div>
+              <div class="tech-value">Eigenes CSS</div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="tech-label">Interaktion</div>
+              <div class="tech-value">Vanilla JavaScript</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>Julia Fleischer · Learning Design Portfolio</span>
+      <span>Arbeitsproben · 2026</span>
+    </div>
+  </footer>
+
+  <!-- Wiederverwendbares Projekt-Modal -->
+  <div class="modal fade" id="projectModal" tabindex="-1"
+       aria-labelledby="projectModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="category" id="projectModalType">Arbeitsprobe</div>
+            <h2 class="modal-title fs-3 mt-1" id="projectModalTitle">Projekt</h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Schließen"></button>
+        </div>
+
+        <div class="modal-body">
+          <p id="projectModalDescription" class="text-secondary-emphasis"></p>
+
+          <div class="project-facts">
+            <div class="project-fact">
+              <small>Mein Beitrag</small>
+              <div id="projectModalRole"></div>
+            </div>
+            <div class="project-fact">
+              <small>Werkzeuge / Technik</small>
+              <div id="projectModalTech"></div>
+            </div>
+          </div>
+
+          <div class="preview mt-4">
+            <div>
+              <strong>Projektinhalt</strong><br>
+              Hier setzen wir später Screenshots, Grafiken,
+              eingebettete Medien oder Simulationen ein.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+          crossorigin="anonymous"></script>
+
+  <script>
+    // Portfolio-Filter
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const portfolioItems = document.querySelectorAll(".portfolio-item");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        portfolioItems.forEach(item => {
+          const categories = item.dataset.category.split(" ");
+          const show = filter === "all" || categories.includes(filter);
+          item.classList.toggle("is-hidden", !show);
+        });
+      });
+    });
+
+    // Wiederverwendbares Modal mit den Daten der gewählten Arbeitsprobe füllen
+    const projectModal = document.getElementById("projectModal");
+
+    projectModal.addEventListener("show.bs.modal", event => {
+      const trigger = event.relatedTarget;
+      if (!trigger) return;
+
+      document.getElementById("projectModalTitle").textContent =
+        trigger.dataset.title || "Arbeitsprobe";
+
+      document.getElementById("projectModalType").textContent =
+        trigger.dataset.type || "Arbeitsprobe";
+
+      document.getElementById("projectModalRole").textContent =
+        trigger.dataset.role || "–";
+
+      document.getElementById("projectModalTech").textContent =
+        trigger.dataset.tech || "–";
+
+      document.getElementById("projectModalDescription").textContent =
+        trigger.dataset.description || "";
+    });
+
+    // Navigation nach Klick auf Mobilgeräten automatisch schließen
+    document.querySelectorAll("#portfolioNav .nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        const nav = document.getElementById("portfolioNav");
+        const collapse = bootstrap.Collapse.getInstance(nav);
+        if (collapse) collapse.hide();
+      });
+    });
+  </script>
+</body>
+</html>
+'''
+
+path = Path("/mnt/data/arbeitsproben_portfolio_noir.html")
+path.write_text(html, encoding="utf-8")
+
+print(f"Erstellt: {path}")
+print(f"Größe: {path.stat().st_size/1024:.1f} KB")
