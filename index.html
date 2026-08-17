@@ -234,6 +234,10 @@
       filter: grayscale(1) contrast(1.05);
     }
 
+    .process-panel--code img {
+      object-position: left center;
+    }
+
     .process-label {
       position: absolute;
       left: .7rem;
@@ -623,6 +627,7 @@
           <span class="meta-pill">HTML · CSS · JavaScript</span>
           <span class="meta-pill">Simulationen</span>
           <span class="meta-pill">Adobe Illustrator</span>
+          <span class="meta-pill">LaTeX &amp; TikZ</span>
           <span class="meta-pill">KI-gestützte Bildgestaltung</span>
         </div>
       </div>
@@ -698,6 +703,38 @@
                 <a class="card-link" href="#" data-bs-toggle="modal"
                    data-bs-target="#bikeModal">
                   Illustrationen ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="grafik technik">
+            <div class="portfolio-card">
+              <div class="process-preview"
+                   aria-label="LaTeX- und TikZ-Code neben der daraus erzeugten Grafik">
+                <div class="process-panel process-panel--code">
+                  <img src="assets/tikz-code-und-vorschau.webp"
+                       alt="LaTeX- und TikZ-Code mit Koordinaten in der Entwicklungsansicht">
+                  <span class="process-label">Code · Koordinaten</span>
+                </div>
+                <div class="process-panel">
+                  <img src="assets/tikz-petrinetz.webp"
+                       alt="Aus TikZ-Code erzeugtes kreisförmiges Petri-Netz">
+                  <span class="process-label">Vektorausgabe</span>
+                </div>
+                <span class="process-arrow" aria-hidden="true">→</span>
+              </div>
+              <div class="card-body">
+                <div class="category">LaTeX · TikZ · Koordinaten</div>
+                <h3 class="card-title">Präzise Grafiken aus Code</h3>
+                <p class="card-text">
+                  Ein Petri-Netz wird vollständig über Knoten, Winkel und Koordinaten
+                  definiert – präzise, skalierbar und reproduzierbar.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#tikzModal">
+                  Code &amp; Ergebnis ansehen
                 </a>
               </div>
             </div>
@@ -1147,6 +1184,62 @@
               <img src="assets/nussknacker-illustration.webp"
                    alt="Finale Nussknackerillustration mit Hebel, Drehpunkt und Kraftvektoren">
               <figcaption>Nussknacker · 3D-Ausarbeitung und Hebelmodell</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Arbeitsprobe: Codebasierte Grafik mit LaTeX und TikZ -->
+  <div class="modal fade" id="tikzModal" tabindex="-1"
+       aria-labelledby="tikzModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="category">LaTeX · TikZ · Petri-Netze</div>
+            <h2 class="modal-title fs-3 mt-1" id="tikzModalTitle">
+              Präzise Grafiken aus Code
+            </h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Schließen"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="section-intro">
+            Dieses Petri-Netz entsteht direkt aus LaTeX-/TikZ-Code. Positionen,
+            Umlaufbahnen, Knoten und Verbindungen werden über Koordinaten und Winkel
+            definiert und anschließend als saubere Vektorgrafik kompiliert.
+          </p>
+
+          <div class="project-facts">
+            <div class="project-fact">
+              <small>Mein Beitrag</small>
+              <div>Grafikkonzept · Koordinatenmodell · TikZ-Implementierung</div>
+            </div>
+            <div class="project-fact">
+              <small>Werkzeuge / Technik</small>
+              <div>LaTeX · TikZ · Petri-Netz-Bibliothek · trigonometrische Positionierung</div>
+            </div>
+            <div class="project-fact">
+              <small>Stärke</small>
+              <div>Exakte, skalierbare und jederzeit reproduzierbare Fachgrafiken</div>
+            </div>
+          </div>
+
+          <div class="case-gallery">
+            <figure>
+              <img src="assets/tikz-code-und-vorschau.webp"
+                   alt="Entwicklungsansicht mit TikZ-Code und kompilierter Vorschau">
+              <figcaption>Codeansicht · Knoten und Positionen werden über Koordinaten definiert</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/tikz-petrinetz.webp"
+                   alt="Fertige vektorbasierte Petri-Netz-Grafik aus TikZ">
+              <figcaption>Ergebnis · Präzise kompilierte Petri-Netz-Grafik</figcaption>
             </figure>
           </div>
         </div>
