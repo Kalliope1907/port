@@ -1250,26 +1250,6 @@
             </figure>
           </div>
 
-          <details class="prompt-disclosure">
-            <summary>TikZ-Implementierung (Auszug)</summary>
-            <pre>\begin{tikzpicture}[
-  &gt;=Stealth,
-  every place/.style={inner sep=0pt, outer sep=0pt},
-  every transition/.style={inner sep=0pt, outer sep=0pt}
-]
-
-\foreach \i/\angle in {1/270, 2/342, 3/54, 4/126, 5/198} {
-  \node[transition] (start-\i)
-    at ({2*cos(\angle)}, {2*sin(\angle)}) {};
-  \node[transition] (finish-\i)
-    at ({5*cos(\angle)}, {5*sin(\angle)}) {};
-}
-
-\foreach \i/\next in {1/2, 2/3, 3/4, 4/5, 5/1} {
-  \draw (active-\i) edge[post, bend right=15] (start-\i);
-  \draw (stick-\i) edge[post] (start-\next);
-}</pre>
-          </details>
         </div>
       </div>
     </div>
