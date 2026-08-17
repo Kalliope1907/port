@@ -267,6 +267,38 @@
       font-size: 1rem;
     }
 
+    .single-asset-preview {
+      position: relative;
+      min-height: 250px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #f5f3ee;
+    }
+
+    .single-asset-preview img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .case-badge {
+      position: absolute;
+      right: .7rem;
+      bottom: .7rem;
+      padding: .4rem .65rem;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(17,17,17,.88);
+      color: var(--text);
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
     .workflow-steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -341,6 +373,57 @@
       font: .78rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace;
     }
 
+    .case-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .case-gallery figure {
+      overflow: hidden;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+      background: var(--surface-2);
+    }
+
+    .case-gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      display: block;
+      background: #f5f3ee;
+    }
+
+    .case-gallery figcaption {
+      padding: .75rem .85rem;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .case-gallery--penge .case-gallery-wide {
+      grid-column: 1 / -1;
+    }
+
+    .case-gallery--penge .case-gallery-wide img {
+      aspect-ratio: 6 / 1;
+      object-fit: cover;
+    }
+
+    .external-case-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      margin-top: 1.25rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .external-case-link:hover {
+      color: var(--text);
+    }
+
     @media (max-width: 767.98px) {
       .workflow-steps,
       .ai-gallery {
@@ -349,6 +432,22 @@
 
       .gallery-card--source {
         grid-column: 1 / -1;
+      }
+
+      .case-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .case-gallery--penge .case-gallery-wide {
+        grid-column: auto;
+      }
+
+      .case-gallery--penge .case-gallery-wide img {
+        aspect-ratio: 3 / 1;
+      }
+
+      #ansatz .row {
+        --bs-gutter-x: 0;
       }
     }
 
@@ -549,6 +648,60 @@
         </div>
 
         <div class="row g-4" id="portfolioGrid">
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="grafik technik ki">
+            <div class="portfolio-card">
+              <div class="single-asset-preview">
+                <img src="assets/penge-stage-03.webp"
+                     alt="In Photoshop und von Hand bearbeitetes PEnGE-Headermotiv mit jonglierendem Clown">
+                <span class="case-badge">KI + Photoshop + Hand</span>
+              </div>
+              <div class="card-body">
+                <div class="category">KI-Ausgang · Photoshop · Headerdesign</div>
+                <h3 class="card-title">Vom KI-Entwurf zum Konferenzheader</h3>
+                <p class="card-text">
+                  KI-Ausgangsbild, eigene Photoshop-Bearbeitung und zeichnerische
+                  Eingriffe verbinden sich im veröffentlichten PEnGE-Header.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#pengeModal">
+                  Header ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="grafik didaktik">
+            <div class="portfolio-card">
+              <div class="process-preview"
+                   aria-label="Zwei mit Adobe Illustrator erstellte Fachillustrationen">
+                <div class="process-panel">
+                  <img src="assets/fahrrad-illustration.webp"
+                       alt="In Adobe Illustrator konstruierte Fahrradgrafik">
+                  <span class="process-label">Fahrrad</span>
+                </div>
+                <div class="process-panel">
+                  <img src="assets/nussknacker-illustration.webp"
+                       alt="In Adobe Illustrator konstruierte Nussknackergrafik">
+                  <span class="process-label">Nussknacker</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="category">Illustrator · Bézier · 3D</div>
+                <h3 class="card-title">Illustrator-Fachillustrationen</h3>
+                <p class="card-text">
+                  Fahrrad und Nussknacker wurden freihändig nach Vorlage konstruiert
+                  und für Physikaufgaben mit Raster und Kraftvektoren ergänzt.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#bikeModal">
+                  Illustrationen ansehen
+                </a>
+              </div>
+            </div>
+          </article>
 
           <article class="col-md-6 col-lg-4 portfolio-item"
                    data-category="grafik technik ki">
@@ -877,6 +1030,124 @@
               Hier setzen wir später Screenshots, Grafiken,
               eingebettete Medien oder Simulationen ein.
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Arbeitsprobe: PEnGE-Header -->
+  <div class="modal fade" id="pengeModal" tabindex="-1"
+       aria-labelledby="pengeModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="category">KI-Ausgangsbild · Photoshop · Handarbeit</div>
+            <h2 class="modal-title fs-3 mt-1" id="pengeModalTitle">
+              Vom KI-Entwurf zum Konferenzheader
+            </h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Schließen"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="section-intro">
+            Für den PEnGE-Workshop habe ich ein KI-generiertes Clownmotiv in
+            Photoshop und von Hand weiterentwickelt und als prägnanten Website-Header umgesetzt.
+          </p>
+
+          <div class="project-facts">
+            <div class="project-fact">
+              <small>Mein Beitrag</small>
+              <div>Konzeption · Photoshop-Compositing · Handbearbeitung · Headerdesign</div>
+            </div>
+            <div class="project-fact">
+              <small>Werkzeuge / Technik</small>
+              <div>KI-Bildgenerator · Adobe Photoshop · Zeichnung und Retusche</div>
+            </div>
+            <div class="project-fact">
+              <small>Einsatz</small>
+              <div>Veröffentlichter Header der PEnGE-Workshop-Website 2025</div>
+            </div>
+          </div>
+
+          <div class="case-gallery case-gallery--penge">
+            <figure>
+              <img src="assets/penge-stage-03.webp"
+                   alt="Weiterentwickelte PEnGE-Komposition mit Clown und Petri-Netz-Typografie">
+              <figcaption>Eigene Ausarbeitung · Komposition, Kontrast und zeichnerische Eingriffe</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/penge-live-banner.webp"
+                   alt="Veröffentlichter PEnGE-Header auf der Workshop-Website">
+              <figcaption>Veröffentlichte Fassung · PEnGE-Workshop 2025</figcaption>
+            </figure>
+          </div>
+
+          <a class="external-case-link"
+             href="https://www.fernuni-hagen.de/penge/penge2025/#top"
+             target="_blank" rel="noopener">
+            Veröffentlichten Header auf der PEnGE-Website ansehen ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Arbeitsprobe: Illustrator-Fachillustrationen für ein Physik-Assessment -->
+  <div class="modal fade" id="bikeModal" tabindex="-1"
+       aria-labelledby="bikeModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="category">Adobe Illustrator · Fachillustration</div>
+            <h2 class="modal-title fs-3 mt-1" id="bikeModalTitle">
+              Illustrator-Fachillustrationen
+            </h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Schließen"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="section-intro">
+            Fahrrad und Nussknacker habe ich nach visuellen Vorlagen in Adobe
+            Illustrator freihändig aufgebaut. Ebenen, Bézierkurven und 3D-Effekte
+            verbinden realistische Darstellung mit den fachlichen Markierungen
+            eines Mathematik-/Physik-Testlets.
+          </p>
+
+          <div class="project-facts">
+            <div class="project-fact">
+              <small>Mein Beitrag</small>
+              <div>Manuelle Illustration · grafische Ausarbeitung · fachliche Markierungen</div>
+            </div>
+            <div class="project-fact">
+              <small>Werkzeuge / Technik</small>
+              <div>Adobe Illustrator · Ebenen · Bézierkurven · 3D-Effekte</div>
+            </div>
+            <div class="project-fact">
+              <small>Einsatz</small>
+              <div>Physik-Testlet · Aufgaben zu Kraft, Hebel und Beschleunigung</div>
+            </div>
+          </div>
+
+          <div class="case-gallery">
+            <figure>
+              <img src="assets/fahrrad-illustration.webp"
+                   alt="Finale Fahrradillustration mit Kraftpfeilen und Raster">
+              <figcaption>Fahrrad · Konstruktion, Bauteile und Kraftvektoren</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/nussknacker-illustration.webp"
+                   alt="Finale Nussknackerillustration mit Hebel, Drehpunkt und Kraftvektoren">
+              <figcaption>Nussknacker · 3D-Ausarbeitung und Hebelmodell</figcaption>
+            </figure>
           </div>
         </div>
       </div>
