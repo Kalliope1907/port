@@ -234,18 +234,6 @@
       filter: grayscale(1) contrast(1.05);
     }
 
-    .process-panel--code img {
-      object-position: left center;
-    }
-
-    .process-preview--code {
-      grid-template-columns: 1.25fr .75fr;
-    }
-
-    .process-preview--code .process-arrow {
-      left: 62.5%;
-    }
-
     .process-label {
       position: absolute;
       left: .7rem;
@@ -293,6 +281,10 @@
       object-fit: cover;
       object-position: center;
       display: block;
+    }
+
+    .single-asset-preview--code img {
+      object-position: left center;
     }
 
     .case-badge {
@@ -423,6 +415,18 @@
       object-fit: cover;
     }
 
+    .case-gallery--tikz {
+      grid-template-columns: 1.35fr .65fr;
+    }
+
+    .case-gallery--tikz img {
+      aspect-ratio: 16 / 10;
+    }
+
+    .case-gallery--tikz figure:last-child img {
+      aspect-ratio: 1 / 1;
+    }
+
     .external-case-link {
       display: inline-flex;
       align-items: center;
@@ -456,6 +460,10 @@
 
       .case-gallery--penge .case-gallery-wide img {
         aspect-ratio: 3 / 1;
+      }
+
+      .case-gallery--tikz {
+        grid-template-columns: 1fr;
       }
 
       #ansatz .row {
@@ -719,26 +727,17 @@
           <article class="col-md-6 col-lg-4 portfolio-item"
                    data-category="grafik technik">
             <div class="portfolio-card">
-              <div class="process-preview process-preview--code"
-                   aria-label="LaTeX- und TikZ-Code neben der daraus erzeugten Grafik">
-                <div class="process-panel process-panel--code">
-                  <img src="assets/tikz-code-ausschnitt.svg"
-                       alt="Gut lesbarer, bereinigter LaTeX- und TikZ-Codeausschnitt">
-                  <span class="process-label">Code · Koordinaten</span>
-                </div>
-                <div class="process-panel">
-                  <img src="assets/tikz-petrinetz.webp"
-                       alt="Aus TikZ-Code erzeugtes kreisförmiges Petri-Netz">
-                  <span class="process-label">Vektorausgabe</span>
-                </div>
-                <span class="process-arrow" aria-hidden="true">→</span>
+              <div class="single-asset-preview single-asset-preview--code">
+                <img src="assets/tikz-code-ausschnitt.svg"
+                     alt="TikZ-Implementierung mit Schleifen, Winkeln und Koordinaten">
+                <span class="case-badge">LaTeX · TikZ</span>
               </div>
               <div class="card-body">
-                <div class="category">LaTeX · TikZ · Koordinaten</div>
-                <h3 class="card-title">Präzise Grafiken aus Code</h3>
+                <div class="category">LaTeX · TikZ · Vektorgrafik</div>
+                <h3 class="card-title">Parametrische Fachgrafiken mit TikZ</h3>
                 <p class="card-text">
-                  Ein Petri-Netz wird vollständig über Knoten, Winkel und Koordinaten
-                  definiert – präzise, skalierbar und reproduzierbar.
+                  Knoten, Umlaufbahnen und Verbindungen eines Petri-Netzes werden
+                  über Winkel, Koordinaten und Schleifen reproduzierbar konstruiert.
                 </p>
                 <a class="card-link" href="#" data-bs-toggle="modal"
                    data-bs-target="#tikzModal">
@@ -1209,7 +1208,7 @@
           <div>
             <div class="category">LaTeX · TikZ · Petri-Netze</div>
             <h2 class="modal-title fs-3 mt-1" id="tikzModalTitle">
-              Präzise Grafiken aus Code
+              Parametrische Fachgrafiken mit TikZ
             </h2>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -1233,26 +1232,26 @@
               <div>LaTeX · TikZ · Petri-Netz-Bibliothek · trigonometrische Positionierung</div>
             </div>
             <div class="project-fact">
-              <small>Stärke</small>
-              <div>Exakte, skalierbare und jederzeit reproduzierbare Fachgrafiken</div>
+              <small>Technischer Mehrwert</small>
+              <div>Parametrische, skalierbare und reproduzierbare Fachgrafiken</div>
             </div>
           </div>
 
-          <div class="case-gallery">
+          <div class="case-gallery case-gallery--tikz">
             <figure>
               <img src="assets/tikz-code-ausschnitt.svg"
-                   alt="Bereinigter TikZ-Code zur koordinatenbasierten Konstruktion">
-              <figcaption>Codeansicht · Aufgeräumter Ausschnitt mit gut lesbaren Koordinaten</figcaption>
+                   alt="TikZ-Implementierung mit parametrischer Knotenplatzierung und zyklischen Verbindungen">
+              <figcaption>Implementierung · Parametrische Platzierung und zyklische Verknüpfung mit Schleifen</figcaption>
             </figure>
             <figure>
               <img src="assets/tikz-petrinetz.webp"
                    alt="Fertige vektorbasierte Petri-Netz-Grafik aus TikZ">
-              <figcaption>Ergebnis · Präzise kompilierte Petri-Netz-Grafik</figcaption>
+              <figcaption>Vektorausgabe · Symmetrisches Petri-Netz für fachliche Dokumentation</figcaption>
             </figure>
           </div>
 
           <details class="prompt-disclosure">
-            <summary>Bereinigten TikZ-Ausschnitt als Text lesen</summary>
+            <summary>TikZ-Implementierung (Auszug)</summary>
             <pre>\begin{tikzpicture}[
   &gt;=Stealth,
   every place/.style={inner sep=0pt, outer sep=0pt},
@@ -1264,6 +1263,11 @@
     at ({2*cos(\angle)}, {2*sin(\angle)}) {};
   \node[transition] (finish-\i)
     at ({5*cos(\angle)}, {5*sin(\angle)}) {};
+}
+
+\foreach \i/\next in {1/2, 2/3, 3/4, 4/5, 5/1} {
+  \draw (active-\i) edge[post, bend right=15] (start-\i);
+  \draw (stick-\i) edge[post] (start-\next);
 }</pre>
           </details>
         </div>
