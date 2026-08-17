@@ -1,11 +1,9 @@
-from pathlib import Path
-
-html = r'''<!doctype html>
+<!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Arbeitsproben – Learning Design, interaktive Lernmedien, technische Umsetzung und Visualisierung">
+  <meta name="description" content="Arbeitsproben – Learning Design, interaktive Lernmedien, KI-gestützte Bildgestaltung, technische Umsetzung und Visualisierung">
   <title>Julia Fleischer · Learning Design Portfolio</title>
 
   <!-- Bootstrap 5.3.8 -->
@@ -32,6 +30,7 @@ html = r'''<!doctype html>
     }
 
     body {
+      overflow-x: hidden;
       background:
         radial-gradient(circle at 85% 10%, rgba(201,163,107,.08), transparent 30rem),
         var(--bg);
@@ -200,6 +199,157 @@ html = r'''<!doctype html>
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.4rem;
       font-weight: 400;
+    }
+
+
+    .process-preview {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 250px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .process-panel {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .process-panel:first-child {
+      border-right: 1px solid rgba(255,255,255,.22);
+    }
+
+    .process-panel img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .process-panel--sketch img {
+      filter: grayscale(1) contrast(1.05);
+    }
+
+    .process-label {
+      position: absolute;
+      left: .7rem;
+      bottom: .7rem;
+      padding: .35rem .55rem;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(17,17,17,.86);
+      color: var(--text);
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .process-arrow {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      background: #181818;
+      color: var(--accent);
+      transform: translate(-50%, -50%);
+      font-size: 1rem;
+    }
+
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem;
+      margin: 1.8rem 0;
+    }
+
+    .workflow-step {
+      padding-top: .75rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .workflow-step span {
+      display: block;
+      margin-bottom: .25rem;
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+    }
+
+    .ai-gallery {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: .85rem;
+      margin-top: 1.5rem;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+      background: var(--surface-2);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-card figcaption {
+      padding: .65rem .7rem;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    .gallery-card--source {
+      border-color: rgba(201,163,107,.5);
+    }
+
+    .prompt-disclosure {
+      margin-top: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+      background: #111;
+    }
+
+    .prompt-disclosure summary {
+      padding: .85rem 1rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .prompt-disclosure pre {
+      margin: 0;
+      padding: 0 1rem 1rem;
+      color: var(--muted);
+      white-space: pre-wrap;
+      font: .78rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+
+    @media (max-width: 767.98px) {
+      .workflow-steps,
+      .ai-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-card--source {
+        grid-column: 1 / -1;
+      }
     }
 
     .card-body {
@@ -374,6 +524,7 @@ html = r'''<!doctype html>
           <span class="meta-pill">HTML · CSS · JavaScript</span>
           <span class="meta-pill">Simulationen</span>
           <span class="meta-pill">Adobe Illustrator</span>
+          <span class="meta-pill">KI-gestützte Bildgestaltung</span>
         </div>
       </div>
     </header>
@@ -393,10 +544,43 @@ html = r'''<!doctype html>
           <button class="filter-btn" data-filter="interaktiv">Interaktive Medien</button>
           <button class="filter-btn" data-filter="simulation">Simulationen</button>
           <button class="filter-btn" data-filter="grafik">Grafik</button>
+          <button class="filter-btn" data-filter="ki">KI &amp; Bild</button>
           <button class="filter-btn" data-filter="technik">Technik</button>
         </div>
 
         <div class="row g-4" id="portfolioGrid">
+
+          <article class="col-md-6 col-lg-4 portfolio-item"
+                   data-category="grafik technik ki">
+            <div class="portfolio-card">
+              <div class="process-preview" aria-label="Vorher-Nachher: Handskizze und KI-Bild">
+                <div class="process-panel process-panel--sketch">
+                  <img src="assets/chamaeleon-skizze.webp"
+                       alt="Handgezeichnete Bleistiftskizze eines Chamäleons auf einem Finger">
+                  <span class="process-label">01 · Handskizze</span>
+                </div>
+                <div class="process-panel">
+                  <img src="assets/chamaeleon-fotorealistisch.webp"
+                       alt="Fotorealistische KI-Interpretation derselben Chamäleon-Skizze">
+                  <span class="process-label">02 · KI-Interpretation</span>
+                </div>
+                <span class="process-arrow" aria-hidden="true">→</span>
+              </div>
+              <div class="card-body">
+                <div class="category">Handskizze · Prompt Design · KI-Bild</div>
+                <h3 class="card-title">Vom Bleistift zum Bildstil</h3>
+                <p class="card-text">
+                  Eine eigene handgezeichnete Chamäleon-Skizze als Ausgangspunkt
+                  für vier gezielt gesteuerte visuelle Interpretationen.
+                </p>
+                <a class="card-link" href="#" data-bs-toggle="modal"
+                   data-bs-target="#chameleonModal">
+                  Prozess &amp; Varianten ansehen
+                </a>
+              </div>
+            </div>
+          </article>
+
 
           <article class="col-md-6 col-lg-4 portfolio-item"
                    data-category="didaktik interaktiv technik">
@@ -699,6 +883,94 @@ html = r'''<!doctype html>
     </div>
   </div>
 
+
+  <!-- Arbeitsprobe: Handskizze zu KI-Stilvarianten -->
+  <div class="modal fade" id="chameleonModal" tabindex="-1"
+       aria-labelledby="chameleonModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="category">Eigene Handskizze · KI-gestützte Bildgestaltung</div>
+            <h2 class="modal-title fs-3 mt-1" id="chameleonModalTitle">
+              Vom Bleistift zum Bildstil
+            </h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Schließen"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="section-intro">
+            Ausgangspunkt ist meine handgezeichnete Bleistiftskizze eines Chamäleons
+            auf einem Finger. Pose, Blickrichtung, Silhouette und Bildaufbau wurden
+            als gestalterische Konstanten definiert; Material, Licht, Farbe und Medium
+            habe ich anschließend über präzise Prompts variiert.
+          </p>
+
+          <div class="project-facts">
+            <div class="project-fact">
+              <small>Mein Beitrag</small>
+              <div>Eigene Skizze · Prompt Design · Art Direction · Auswahl</div>
+            </div>
+            <div class="project-fact">
+              <small>Werkzeuge / Technik</small>
+              <div>Bleistiftzeichnung · KI-Bildgenerator · iterative Qualitätsprüfung</div>
+            </div>
+            <div class="project-fact">
+              <small>Ziel</small>
+              <div>Stilkonsistenz bei erkennbar gleicher Bildidee demonstrieren</div>
+            </div>
+          </div>
+
+          <div class="workflow-steps" aria-label="Arbeitsprozess">
+            <div class="workflow-step"><span>01</span>Handskizze digitalisieren</div>
+            <div class="workflow-step"><span>02</span>Motiv und Komposition sperren</div>
+            <div class="workflow-step"><span>03</span>Stil, Licht und Material steuern</div>
+            <div class="workflow-step"><span>04</span>Ergebnisse prüfen und auswählen</div>
+          </div>
+
+          <div class="ai-gallery">
+            <figure class="gallery-card gallery-card--source">
+              <img src="assets/chamaeleon-skizze.webp"
+                   alt="Originale handgezeichnete Chamäleon-Skizze">
+              <figcaption>Original · Handskizze</figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/chamaeleon-fotorealistisch.webp"
+                   alt="Fotorealistische KI-Variante">
+              <figcaption>KI · Fotorealistisch</figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/chamaeleon-aquarell.webp"
+                   alt="Aquarell- und Tuschevariante">
+              <figcaption>KI · Aquarell</figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/chamaeleon-risograph.webp"
+                   alt="Risograph-Variante in Coral, Blau und Gelb">
+              <figcaption>KI · Risograph</figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/chamaeleon-iridescent-3d.webp"
+                   alt="Irisierende dreidimensionale Glasvariante">
+              <figcaption>KI · 3D-Materialstudie</figcaption>
+            </figure>
+          </div>
+
+          <details class="prompt-disclosure">
+            <summary>Beispiel für die Prompt-Logik</summary>
+            <pre>Input image: eigene Bleistiftskizze als Editierziel und Kompositionsreferenz.
+Motiv-Lock: genau ein Chamäleon auf einem aufrechten Zeigefinger; Fingernagel frontal; Kopf nach links; eingerollter Schwanz rechts.
+Stilsteuerung: Medium, Farbpalette, Material, Licht und Textur pro Variante verändern.
+Konstanten: vertikaler Nahbeschnitt, Pose, Silhouette und Negativraum erhalten.
+Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder Gliedmaßen, kein Text, kein Wasserzeichen.</pre>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
@@ -758,10 +1030,3 @@ html = r'''<!doctype html>
   </script>
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/arbeitsproben_portfolio_noir.html")
-path.write_text(html, encoding="utf-8")
-
-print(f"Erstellt: {path}")
-print(f"Größe: {path.stat().st_size/1024:.1f} KB")
