@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Bereinigter LaTeX- und TikZ-Code</title>
+  <desc id="desc">Gut lesbarer Codeausschnitt zur koordinatenbasierten Konstruktion eines Petri-Netzes</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d2940"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <style>
+      .code { font: 48px ui-monospace, SFMono-Regular, Consolas, monospace; fill: #e5e7eb; }
+      .number { font: 33px ui-monospace, SFMono-Regular, Consolas, monospace; fill: #667085; }
+      .command { fill: #c4a7ff; }
+      .option { fill: #7dd3fc; }
+      .value { fill: #f6c177; }
+      .comment { fill: #86d9a0; }
+    </style>
+  </defs>
+
+  <rect width="900" height="1200" rx="34" fill="url(#panel)"/>
+  <rect x="1" y="1" width="898" height="1198" rx="33" fill="none" stroke="#334155" stroke-width="2"/>
+  <circle cx="62" cy="62" r="13" fill="#fb7185"/>
+  <circle cx="104" cy="62" r="13" fill="#f6c177"/>
+  <circle cx="146" cy="62" r="13" fill="#86d9a0"/>
+  <text x="820" y="74" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="30" fill="#94a3b8">TikZ</text>
+  <line x1="42" y1="108" x2="858" y2="108" stroke="#334155" stroke-width="2"/>
+
+  <g class="number" text-anchor="end">
+    <text x="74" y="184">01</text><text x="74" y="252">02</text>
+    <text x="74" y="320">03</text><text x="74" y="388">04</text>
+    <text x="74" y="456">05</text><text x="74" y="524">06</text>
+    <text x="74" y="592">07</text><text x="74" y="660">08</text>
+    <text x="74" y="728">09</text><text x="74" y="796">10</text>
+    <text x="74" y="864">11</text><text x="74" y="932">12</text>
+    <text x="74" y="1000">13</text><text x="74" y="1068">14</text>
+    <text x="74" y="1136">15</text>
+  </g>
+  <line x1="98" y1="134" x2="98" y2="1100" stroke="#334155" stroke-width="2"/>
+
+  <g class="code" xml:space="preserve">
+    <text x="128" y="184" class="command">\begin{tikzpicture}[</text>
+    <text x="128" y="252">  <tspan class="option">&gt;=Stealth</tspan>,</text>
+    <text x="128" y="320">  every place/.style={</text>
+    <text x="128" y="388">    inner sep=<tspan class="value">0pt</tspan>,</text>
+    <text x="128" y="456">    outer sep=<tspan class="value">0pt</tspan></text>
+    <text x="128" y="524">  }</text>
+    <text x="128" y="592">]</text>
+    <text x="128" y="660" class="comment">% fivefold geometry</text>
+    <text x="128" y="728" class="command">\foreach \i/\angle in {</text>
+    <text x="128" y="796">  <tspan class="value">1/270, 2/342, 3/54,</tspan></text>
+    <text x="128" y="864">  <tspan class="value">4/126, 5/198</tspan></text>
+    <text x="128" y="932">} {</text>
+    <text x="128" y="1000" class="command">  \node[transition]</text>
+    <text x="128" y="1068">    at ({<tspan class="value">2*cos(\angle)</tspan>},</text>
+    <text x="128" y="1136">        {<tspan class="value">2*sin(\angle)</tspan>}) {};</text>
+  </g>
+</svg>
