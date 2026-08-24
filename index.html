@@ -43,6 +43,29 @@
       color: inherit;
     }
 
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 1100;
+      top: .75rem;
+      left: .75rem;
+      padding: .65rem 1rem;
+      border-radius: .4rem;
+      background: var(--accent);
+      color: #173a56;
+      font-weight: 700;
+      transform: translateY(-160%);
+      transition: transform .2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
     .container-xl {
       max-width: var(--max-width);
     }
@@ -68,53 +91,6 @@
     .nav-link {
       color: var(--muted);
       font-size: .92rem;
-    }
-
-    .hero {
-      min-height: 76vh;
-      display: flex;
-      align-items: center;
-      padding: 8rem 0 5rem;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      max-width: 900px;
-      margin-top: 1rem;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3.1rem, 8vw, 7.2rem);
-      font-weight: 400;
-      line-height: .95;
-      letter-spacing: -.045em;
-    }
-
-    .hero-copy {
-      max-width: 720px;
-      margin-top: 2rem;
-      color: var(--muted);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-    }
-
-    .hero-meta {
-      margin-top: 2.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: .7rem;
-    }
-
-    .meta-pill {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: .5rem .85rem;
-      color: var(--muted);
-      font-size: .82rem;
     }
 
     section {
@@ -160,11 +136,17 @@
       transition: .2s ease;
     }
 
-    .filter-btn:hover,
-    .filter-btn.active {
+    .filter-btn:hover {
       border-color: var(--accent);
       background: var(--accent-soft);
       color: var(--text);
+    }
+
+    .filter-btn.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #173a56;
+      font-weight: 700;
     }
 
     .portfolio-card {
@@ -406,15 +388,6 @@
       font-size: .8rem;
     }
 
-    .case-gallery--penge .case-gallery-wide {
-      grid-column: 1 / -1;
-    }
-
-    .case-gallery--penge .case-gallery-wide img {
-      aspect-ratio: 6 / 1;
-      object-fit: cover;
-    }
-
     .case-gallery--tikz {
       grid-template-columns: 1.35fr .65fr;
     }
@@ -454,21 +427,10 @@
         grid-template-columns: 1fr;
       }
 
-      .case-gallery--penge .case-gallery-wide {
-        grid-column: auto;
-      }
-
-      .case-gallery--penge .case-gallery-wide img {
-        aspect-ratio: 3 / 1;
-      }
-
       .case-gallery--tikz {
         grid-template-columns: 1fr;
       }
 
-      #ansatz .row {
-        --bs-gutter-x: 0;
-      }
     }
 
     .card-body {
@@ -496,38 +458,36 @@
       font-size: .93rem;
     }
 
-    .card-link {
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .75rem 1.1rem;
+      margin-top: .7rem;
+    }
+
+    .card-link,
+    .context-link {
+      appearance: none;
       display: inline-block;
-      margin-top: .5rem;
-      color: var(--text);
-      text-decoration: none;
+      border: 0;
       border-bottom: 1px solid var(--accent);
+      background: transparent;
+      color: var(--text);
+      padding: 0;
+      font: inherit;
+      text-decoration: none;
+      cursor: pointer;
     }
 
-    .card-link:hover {
-      color: var(--accent);
-    }
-
-    .principle {
-      padding: 1.5rem 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .principle-number {
-      color: var(--accent);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.6rem;
-    }
-
-    .principle h3 {
-      font-size: 1rem;
-      font-weight: 650;
-    }
-
-    .principle p {
-      margin-bottom: 0;
+    .context-link {
+      border-bottom-color: var(--muted);
       color: var(--muted);
-      font-size: .92rem;
+    }
+
+    .card-link:hover,
+    .context-link:hover {
+      color: var(--accent);
     }
 
     .tech-strip {
@@ -555,8 +515,7 @@
       border: 1px solid var(--line);
     }
 
-    .modal-header,
-    .modal-footer {
+    .modal-header {
       border-color: var(--line);
     }
 
@@ -607,6 +566,8 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#top">Zum Hauptinhalt springen</a>
+
   <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-xl">
       <a class="navbar-brand" href="#top">Julia Fleischer</a>
@@ -620,7 +581,6 @@
       <div class="collapse navbar-collapse" id="portfolioNav">
         <ul class="navbar-nav ms-auto gap-md-3">
           <li class="nav-item"><a class="nav-link" href="#arbeiten">Arbeitsproben</a></li>
-          <li class="nav-item"><a class="nav-link" href="#ansatz">Learning Design</a></li>
           <li class="nav-item"><a class="nav-link" href="#technik">Technik</a></li>
         </ul>
       </div>
@@ -628,44 +588,27 @@
   </nav>
 
   <main id="top">
-    <!--<header class="hero">
-      <div class="container-xl">
-        <div class="eyebrow">Learning Design · E-Learning · Visualisierung</div>
-        <h1>Lernen gestalten.<br>Inhalte begreifbar machen.</h1>
-        <p class="hero-copy">
-          Ausgewählte Arbeitsproben an der Schnittstelle von Didaktik,
-          interaktiven Lernmedien, technischer Umsetzung und visueller Kommunikation.
-        </p>
-
-        <div class="hero-meta" aria-label="Schwerpunkte">
-          <span class="meta-pill">Instructional Design</span>
-          <span class="meta-pill">Moodle &amp; H5P</span>
-          <span class="meta-pill">HTML · CSS · JavaScript</span>
-          <span class="meta-pill">Simulationen</span>
-          <span class="meta-pill">Adobe Illustrator</span>
-          <span class="meta-pill">LaTeX &amp; TikZ</span>
-          <span class="meta-pill">KI-gestützte Bildgestaltung</span>
-        </div>
-      </div>
-    </header>-->
+    <h1 class="visually-hidden">Learning Design Portfolio – Julia Fleischer</h1>
 
     <section id="arbeiten">
       <div class="container-xl">
         <div class="section-kicker">Portfolio</div>
         <h2 class="section-title">Ausgewählte Arbeiten</h2>
         <p class="section-intro">
-          Arbeitsproben, didaktische Entscheidung & technische Umsetzung.
+          Arbeitsproben, didaktische Entscheidung &amp; technische Umsetzung.
         </p>
 
         <div class="filter-bar" role="group" aria-label="Arbeitsproben filtern">
-          <button class="filter-btn active" data-filter="all">Alle</button>
-          <button class="filter-btn" data-filter="didaktik">Didaktik</button>
-          <button class="filter-btn" data-filter="interaktiv">Interaktive Medien</button>
-          <button class="filter-btn" data-filter="simulation">Simulationen</button>
-          <button class="filter-btn" data-filter="grafik">Grafik</button>
-          <button class="filter-btn" data-filter="ki">KI &amp; Bild</button>
-          <button class="filter-btn" data-filter="technik">Technik</button>
+          <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">Alle</button>
+          <button type="button" class="filter-btn" data-filter="didaktik" aria-pressed="false">Didaktik</button>
+          <button type="button" class="filter-btn" data-filter="interaktiv" aria-pressed="false">Interaktive Medien</button>
+          <button type="button" class="filter-btn" data-filter="simulation" aria-pressed="false">Simulationen</button>
+          <button type="button" class="filter-btn" data-filter="grafik" aria-pressed="false">Grafik</button>
+          <button type="button" class="filter-btn" data-filter="ki" aria-pressed="false">KI &amp; Bild</button>
+          <button type="button" class="filter-btn" data-filter="technik" aria-pressed="false">Technik</button>
         </div>
+
+        <p id="filterStatus" class="visually-hidden" aria-live="polite"></p>
 
         <div class="row g-4" id="portfolioGrid">
 
@@ -684,10 +627,21 @@
                   KI-Ausgangsbild, eigene Photoshop-Bearbeitung und zeichnerische
                   Eingriffe verbinden sich im veröffentlichten PEnGE-Header.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#pengeModal">
-                  Header ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#pengeModal"
+                          aria-label="Konferenzheader PEnGE ansehen">
+                    Header ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Vom KI-Entwurf zum Konferenzheader"
+                          data-requirement="Für den PEnGE-Workshop 2025 sollte aus einem KI-generierten Clownmotiv ein veröffentlichungsfähiger, prägnanter Website-Header entstehen."
+                          data-didactic=""
+                          aria-label="Kontext zum Konferenzheader PEnGE">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -715,10 +669,21 @@
                   Fahrrad und Nussknacker wurden freihändig nach Vorlage konstruiert
                   und für Physikaufgaben mit Raster und Kraftvektoren ergänzt.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#bikeModal">
-                  Illustrationen ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#bikeModal"
+                          aria-label="Illustrator-Fachillustrationen ansehen">
+                    Illustrationen ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Illustrator-Fachillustrationen"
+                          data-requirement="Für ein Mathematik-/Physik-Testlet wurden fachlich belastbare Fahrrad- und Nussknackerillustrationen benötigt, die Kräfte, Hebel und Beschleunigung sichtbar machen."
+                          data-didactic="Die Darstellungen reduzieren irrelevante Details und machen die für die Aufgabenbearbeitung relevanten Bauteile, Raster und Kraftvektoren direkt erkennbar."
+                          aria-label="Kontext zu den Illustrator-Fachillustrationen">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -738,10 +703,21 @@
                   Knoten, Umlaufbahnen und Verbindungen eines Petri-Netzes werden
                   über Winkel, Koordinaten und Schleifen reproduzierbar konstruiert.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#tikzModal">
-                  Code &amp; Ergebnis ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#tikzModal"
+                          aria-label="TikZ-Code und Ergebnis ansehen">
+                    Code &amp; Ergebnis ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Parametrische Fachgrafiken mit TikZ"
+                          data-requirement="Eine komplexe Petri-Netz-Grafik sollte präzise, skalierbar und reproduzierbar statt manuell gezeichnet werden."
+                          data-didactic="Die konsistente Geometrie unterstützt das Erkennen von Knoten, Umlaufbahnen und zyklischen Beziehungen. Die Grafik lässt sich ohne Qualitätsverlust in Lern- und Fachmaterialien einsetzen."
+                          aria-label="Kontext zu den parametrischen TikZ-Grafiken">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -769,10 +745,21 @@
                   Eine eigene handgezeichnete Chamäleon-Skizze als Ausgangspunkt
                   für vier gezielt gesteuerte visuelle Interpretationen.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#chameleonModal">
-                  Prozess &amp; Varianten ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#chameleonModal"
+                          aria-label="Chamäleon-Prozess und Varianten ansehen">
+                    Prozess &amp; Varianten ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Vom Bleistift zum Bildstil"
+                          data-requirement="Aus einer eigenen Handskizze sollten mehrere stilistisch unterschiedliche, aber kompositorisch konsistente Bildvarianten entstehen."
+                          data-didactic=""
+                          aria-label="Kontext zum Chamäleon-Gestaltungsprozess">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -784,7 +771,7 @@
               <div class="preview">
                 <div>
                   <strong>Lerneinheit</strong><br>
-                  Screenshot / Mockup später einsetzen
+                  Konzept in Ausarbeitung
                 </div>
               </div>
               <div class="card-body">
@@ -794,15 +781,26 @@
                   Beispiel für die didaktische Aufbereitung eines fachlich komplexen
                   Inhalts in einer digitalen Lernumgebung.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#projectModal"
-                   data-title="Software Engineering"
-                   data-type="Digitale Lerneinheit"
-                   data-role="Konzeption · Strukturierung · Umsetzung"
-                   data-tech="Moodle · H5P · HTML/CSS"
-                   data-description="Hier beschreiben wir später Lernziel, Ausgangslage, didaktische Entscheidung und die konkrete Umsetzung.">
-                  Projekt ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#projectModal"
+                          data-title="Software Engineering"
+                          data-type="Digitale Lerneinheit"
+                          data-role="Konzeption · Strukturierung · Umsetzung"
+                          data-tech="Moodle · H5P · HTML/CSS"
+                          data-description="Konzeptskizze für die strukturierte Aufbereitung eines komplexen fachlichen Inhalts in einer digitalen Lernumgebung."
+                          aria-label="Projekt Software Engineering ansehen">
+                    Projekt ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Software Engineering"
+                          data-requirement="Komplexe Inhalte aus dem Software Engineering sollen in eine strukturierte digitale Lerneinheit überführt werden."
+                          data-didactic="Vorgesehen ist eine problemorientierte Struktur aus Konzept, Beispiel, Anwendung und Feedback. Die vollständige didaktische Ausarbeitung ist noch nicht als Arbeitsprobe hinterlegt."
+                          aria-label="Kontext zum Projekt Software Engineering">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -813,7 +811,7 @@
               <div class="preview">
                 <div>
                   <strong>Assessment</strong><br>
-                  Beispielaufgabe / Testlogik später einsetzen
+                  Konzept in Ausarbeitung
                 </div>
               </div>
               <div class="card-body">
@@ -823,15 +821,26 @@
                   Lernstandsdiagnostik und Aufgabenentwicklung als Bestandteil
                   eines strukturierten Lernprozesses.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#projectModal"
-                   data-title="Diagnostisches Lernen"
-                   data-type="Assessment"
-                   data-role="Konzeption · Aufgabenentwicklung"
-                   data-tech="Testdesign · digitale Lernumgebung"
-                   data-description="Hier können später Beispielitems, Feedbacklogik und die didaktische Funktion des Assessments gezeigt werden.">
-                  Projekt ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#projectModal"
+                          data-title="Diagnostisches Lernen"
+                          data-type="Assessment"
+                          data-role="Konzeption · Aufgabenentwicklung"
+                          data-tech="Testdesign · digitale Lernumgebung"
+                          data-description="Konzept für diagnostische Aufgaben und eine Feedbacklogik, die Fehlvorstellungen sichtbar macht."
+                          aria-label="Projekt Diagnostisches Lernen ansehen">
+                    Projekt ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Diagnostisches Lernen"
+                          data-requirement="Lernstände sollen mit geeigneten Aufgaben sichtbar werden, ohne Assessment nur als Abschlusskontrolle zu verwenden."
+                          data-didactic="Diagnostische Items und spezifisches Feedback decken Fehlvorstellungen auf und geben Hinweise für den nächsten Lernschritt."
+                          aria-label="Kontext zum Projekt Diagnostisches Lernen">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -842,7 +851,7 @@
               <div class="preview">
                 <div>
                   <strong>Interaktive Simulation</strong><br>
-                  JavaScript-Demo später direkt hier einbetten
+                  Konzept in Ausarbeitung
                 </div>
               </div>
               <div class="card-body">
@@ -852,15 +861,26 @@
                   Eine kleine Simulation, bei der Interaktion nicht Selbstzweck ist,
                   sondern fachliche Zusammenhänge sichtbar macht.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#projectModal"
-                   data-title="Lernen durch Exploration"
-                   data-type="Interaktive Simulation"
-                   data-role="Konzept · Programmierung · didaktische Einbettung"
-                   data-tech="HTML · CSS · Vanilla JavaScript"
-                   data-description="Hier kann später eine echte kleine Simulation direkt in die Seite integriert werden.">
-                  Projekt ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#projectModal"
+                          data-title="Lernen durch Exploration"
+                          data-type="Interaktive Simulation"
+                          data-role="Konzept · Programmierung · didaktische Einbettung"
+                          data-tech="HTML · CSS · Vanilla JavaScript"
+                          data-description="Konzept einer kleinen Simulation, in der die Interaktion fachliche Zusammenhänge sichtbar und untersuchbar macht."
+                          aria-label="Projekt Lernen durch Exploration ansehen">
+                    Projekt ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Lernen durch Exploration"
+                          data-requirement="Ein abstraktes Systemverhalten soll über eine kleine interaktive Simulation untersuchbar werden."
+                          data-didactic="Lernende verändern Parameter, beobachten die Folgen und prüfen eigene Hypothesen. Die Simulation verbindet Handlung mit unmittelbarem Feedback."
+                          aria-label="Kontext zum Projekt Lernen durch Exploration">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -871,7 +891,7 @@
               <div class="preview">
                 <div>
                   <strong>Visualisierung</strong><br>
-                  Illustrator-Grafik später einsetzen
+                  Konzept in Ausarbeitung
                 </div>
               </div>
               <div class="card-body">
@@ -881,15 +901,26 @@
                   Eigene fachliche Grafiken und visuelle Modelle als Bestandteil
                   verständlicher Lernmaterialien.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#projectModal"
-                   data-title="Komplexität sichtbar machen"
-                   data-type="Fachvisualisierung"
-                   data-role="Konzeption · Gestaltung"
-                   data-tech="Adobe Illustrator"
-                   data-description="Hier zeigen wir später Originalgrafik, Einsatzkontext und gestalterische beziehungsweise didaktische Überlegungen.">
-                  Projekt ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#projectModal"
+                          data-title="Komplexität sichtbar machen"
+                          data-type="Fachvisualisierung"
+                          data-role="Konzeption · Gestaltung"
+                          data-tech="Adobe Illustrator"
+                          data-description="Konzept für eine Fachvisualisierung, die komplexe Zusammenhänge präzise und verständlich darstellt."
+                          aria-label="Projekt Komplexität sichtbar machen ansehen">
+                    Projekt ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Komplexität sichtbar machen"
+                          data-requirement="Komplexe fachliche Zusammenhänge sollen in einer präzisen Illustration verständlich und aufgabenbezogen sichtbar werden."
+                          data-didactic=""
+                          aria-label="Kontext zum Projekt Komplexität sichtbar machen">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -910,9 +941,20 @@
                   Responsive Ein-Datei-Website mit Bootstrap, eigenem CSS
                   und eigener JavaScript-Interaktion.
                 </p>
-                <a class="card-link" href="#technik">
-                  Technische Details
-                </a>
+                <div class="card-actions">
+                  <a class="card-link" href="#technik"
+                     aria-label="Technische Details dieses Portfolios ansehen">
+                    Technische Details
+                  </a>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Dieses Portfolio"
+                          data-requirement="Arbeitsproben, Entscheidungen und technische Umsetzung sollten auf einer eigenständig entwickelten, responsiven Website zusammengeführt werden."
+                          data-didactic=""
+                          aria-label="Kontext zu diesem Portfolio">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
@@ -923,7 +965,7 @@
               <div class="preview">
                 <div>
                   <strong>Learning Design</strong><br>
-                  Kursstruktur / Lernpfad später einsetzen
+                  Konzept in Ausarbeitung
                 </div>
               </div>
               <div class="card-body">
@@ -933,68 +975,30 @@
                   Beispiel für die Konzeption eines vollständigen Lernangebots
                   von Zielgruppe und Lernziel bis zu Übung und Feedback.
                 </p>
-                <a class="card-link" href="#" data-bs-toggle="modal"
-                   data-bs-target="#projectModal"
-                   data-title="Vom Lernziel zum Lernangebot"
-                   data-type="Learning Design"
-                   data-role="Didaktische Konzeption"
-                   data-tech="Lernzielanalyse · Strukturierung · Assessment"
-                   data-description="Hier kann später ein Brückenkurs oder eine andere konzeptionell starke Arbeitsprobe ausgearbeitet werden.">
-                  Projekt ansehen
-                </a>
+                <div class="card-actions">
+                  <button type="button" class="card-link" data-bs-toggle="modal"
+                          data-bs-target="#projectModal"
+                          data-title="Vom Lernziel zum Lernangebot"
+                          data-type="Learning Design"
+                          data-role="Didaktische Konzeption"
+                          data-tech="Lernzielanalyse · Strukturierung · Assessment"
+                          data-description="Konzeptskizze für ein vollständiges Lernangebot von Zielgruppe und Lernziel bis zu Übung, Feedback und Assessment."
+                          aria-label="Projekt Vom Lernziel zum Lernangebot ansehen">
+                    Projekt ansehen
+                  </button>
+                  <button type="button" class="context-link" data-bs-toggle="modal"
+                          data-bs-target="#contextModal"
+                          data-context-title="Vom Lernziel zum Lernangebot"
+                          data-requirement="Für eine definierte Zielgruppe soll aus einem Lernziel ein vollständiges Lernangebot mit Übung, Feedback und Assessment entstehen."
+                          data-didactic="Vorgesehen ist Constructive Alignment: Lernziele, Lernaktivitäten und Assessment werden konsequent aufeinander abgestimmt. Die konkrete Arbeitsprobe ist noch in Ausarbeitung."
+                          aria-label="Kontext zum Projekt Vom Lernziel zum Lernangebot">
+                    Kontext
+                  </button>
+                </div>
               </div>
             </div>
           </article>
 
-        </div>
-      </div>
-    </section>
-
-   <!-- <section id="ansatz">
-      <div class="container-xl">
-        <div class="row g-5">
-          <div class="col-lg-5">
-            <div class="section-kicker">Learning Design</div>
-            <h2 class="section-title">Nicht nur zeigen, was. Sondern warum.</h2>
-            <p class="section-intro">
-              Jede Arbeitsprobe soll die Verbindung zwischen fachlichem Inhalt,
-              Lernziel, didaktischer Entscheidung und Medium sichtbar machen.
-            </p>
-          </div>
-
-          <div class="col-lg-6 offset-lg-1">
-            <div class="principle row">
-              <div class="col-2 principle-number">01</div>
-              <div class="col-10">
-                <h3>Ausgangslage</h3>
-                <p>Was sollten Lernende verstehen oder können – und wo lag die Schwierigkeit?</p>
-              </div>
-            </div>
-
-            <div class="principle row">
-              <div class="col-2 principle-number">02</div>
-              <div class="col-10">
-                <h3>Didaktische Entscheidung</h3>
-                <p>Warum wurde genau diese Struktur, Aufgabe, Visualisierung oder Interaktion gewählt?</p>
-              </div>
-            </div>
-
-            <div class="principle row">
-              <div class="col-2 principle-number">03</div>
-              <div class="col-10">
-                <h3>Umsetzung</h3>
-                <p>Welche Werkzeuge und Technologien wurden eingesetzt und was war mein eigener Anteil?</p>
-              </div>
-            </div>
-
-            <div class="principle row">
-              <div class="col-2 principle-number">04</div>
-              <div class="col-10">
-                <h3>Wirkung</h3>
-                <p>Was verbessert die Lösung für Lernende – fachlich, visuell oder in der Bedienung?</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -1007,7 +1011,7 @@
           Kein Website-Baukasten: responsives Layout, individuelle Gestaltung
           und gezielte JavaScript-Interaktion in einer schlanken Struktur.
         </p>
--->
+
         <div class="tech-strip">
           <div class="row g-4">
             <div class="col-6 col-lg-3">
@@ -1070,14 +1074,35 @@
               <div id="projectModalTech"></div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <div class="preview mt-4">
-            <div>
-              <strong>Projektinhalt</strong><br>
-              Hier setzen wir später Screenshots, Grafiken,
-              eingebettete Medien oder Simulationen ein.
-            </div>
+  <div class="modal fade" id="contextModal" tabindex="-1"
+       aria-labelledby="contextModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="category">Projektkontext</div>
+            <h2 class="modal-title fs-3 mt-1" id="contextModalTitle">Kontext</h2>
           </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Schließen"></button>
+        </div>
+
+        <div class="modal-body">
+          <section class="p-0 border-0" aria-labelledby="contextRequirementTitle">
+            <h3 class="fs-5" id="contextRequirementTitle">Anforderung</h3>
+            <p id="contextRequirement" class="text-secondary-emphasis mb-0"></p>
+          </section>
+
+          <section class="p-0 border-0 mt-4" id="contextDidacticBlock"
+                   aria-labelledby="contextDidacticTitle">
+            <h3 class="fs-5" id="contextDidacticTitle">Didaktische Idee</h3>
+            <p id="contextDidactic" class="text-secondary-emphasis mb-0"></p>
+          </section>
         </div>
       </div>
     </div>
@@ -1355,19 +1380,36 @@ Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder G
     // Portfolio-Filter
     const filterButtons = document.querySelectorAll(".filter-btn");
     const portfolioItems = document.querySelectorAll(".portfolio-item");
+    const filterStatus = document.getElementById("filterStatus");
+
+    const updateFilterStatus = visibleCount => {
+      filterStatus.textContent = visibleCount === 1
+        ? "1 Arbeitsprobe angezeigt."
+        : `${visibleCount} Arbeitsproben angezeigt.`;
+    };
+
+    updateFilterStatus(portfolioItems.length);
 
     filterButtons.forEach(button => {
       button.addEventListener("click", () => {
         const filter = button.dataset.filter;
+        let visibleCount = 0;
 
-        filterButtons.forEach(btn => btn.classList.remove("active"));
+        filterButtons.forEach(btn => {
+          btn.classList.remove("active");
+          btn.setAttribute("aria-pressed", "false");
+        });
         button.classList.add("active");
+        button.setAttribute("aria-pressed", "true");
 
         portfolioItems.forEach(item => {
           const categories = item.dataset.category.split(" ");
           const show = filter === "all" || categories.includes(filter);
           item.classList.toggle("is-hidden", !show);
+          if (show) visibleCount += 1;
         });
+
+        updateFilterStatus(visibleCount);
       });
     });
 
@@ -1392,6 +1434,24 @@ Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder G
 
       document.getElementById("projectModalDescription").textContent =
         trigger.dataset.description || "";
+    });
+
+    const contextModal = document.getElementById("contextModal");
+
+    contextModal.addEventListener("show.bs.modal", event => {
+      const trigger = event.relatedTarget;
+      if (!trigger) return;
+
+      const didacticIdea = trigger.dataset.didactic?.trim() || "";
+
+      document.getElementById("contextModalTitle").textContent =
+        trigger.dataset.contextTitle || "Kontext";
+
+      document.getElementById("contextRequirement").textContent =
+        trigger.dataset.requirement || "Keine Anforderung dokumentiert.";
+
+      document.getElementById("contextDidactic").textContent = didacticIdea;
+      document.getElementById("contextDidacticBlock").hidden = !didacticIdea;
     });
 
     // Navigation nach Klick auf Mobilgeräten automatisch schließen
