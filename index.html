@@ -216,6 +216,19 @@
       filter: grayscale(1) contrast(1.05);
     }
 
+    .process-panel--code img {
+      object-position: left center;
+    }
+
+    .process-panel--result {
+      background: #f5f3ee;
+    }
+
+    .process-panel--result img {
+      object-fit: contain;
+      padding: .65rem;
+    }
+
     .process-label {
       position: absolute;
       left: .7rem;
@@ -263,10 +276,6 @@
       object-fit: cover;
       object-position: center;
       display: block;
-    }
-
-    .single-asset-preview--code img {
-      object-position: left center;
     }
 
     .case-badge {
@@ -691,10 +700,19 @@
           <article class="col-md-6 col-lg-4 portfolio-item"
                    data-category="grafik technik">
             <div class="portfolio-card">
-              <div class="single-asset-preview single-asset-preview--code">
-                <img src="assets/tikz-code-ausschnitt.svg"
-                     alt="TikZ-Implementierung mit Schleifen, Winkeln und Koordinaten">
-                <span class="case-badge">LaTeX · TikZ</span>
+              <div class="process-preview"
+                   aria-label="Vom TikZ-Code zur fertigen Petri-Netz-Vektorgrafik">
+                <div class="process-panel process-panel--code">
+                  <img src="assets/tikz-code-ausschnitt.svg"
+                       alt="TikZ-Code mit Schleifen, Winkeln und Koordinaten">
+                  <span class="process-label">01 · TikZ-Code</span>
+                </div>
+                <div class="process-panel process-panel--result">
+                  <img src="assets/tikz-petrinetz.webp"
+                       alt="Aus dem TikZ-Code erzeugte Petri-Netz-Vektorgrafik">
+                  <span class="process-label">02 · Vektorausgabe</span>
+                </div>
+                <span class="process-arrow" aria-hidden="true">→</span>
               </div>
               <div class="card-body">
                 <div class="category">LaTeX · TikZ · Vektorgrafik</div>
@@ -1007,12 +1025,8 @@
       <div class="container-xl">
         <div class="section-kicker">Technische Umsetzung</div>
         <h2 class="visually-hidden">Technische Umsetzung</h2>
-        <p class="section-intro mb-5 mt-2">
-          Kein Website-Baukasten: responsives Layout, individuelle Gestaltung
-          und gezielte JavaScript-Interaktion in einer schlanken Struktur.
-        </p>
 
-        <div class="tech-strip">
+        <div class="tech-strip mt-4">
           <div class="row g-4">
             <div class="col-6 col-lg-3">
               <div class="tech-label">Struktur</div>
