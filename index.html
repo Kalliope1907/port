@@ -532,6 +532,80 @@
       filter: invert(1);
     }
 
+    .storyline-modal .modal-dialog {
+      width: calc(100vw - 2rem);
+      max-width: 1600px;
+      height: calc(100vh - 2rem);
+      margin: 1rem auto;
+    }
+
+    .storyline-modal .modal-content {
+      height: 100%;
+      overflow: hidden;
+      border-color: rgba(66, 193, 211, .55);
+      border-radius: 1rem;
+      background: #07111b;
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .55);
+    }
+
+    .storyline-modal .modal-header {
+      flex: 0 0 auto;
+      gap: 1rem;
+      padding: .65rem 1rem;
+      background: #0b1723;
+    }
+
+    .storyline-modal .modal-title {
+      font-size: 1rem;
+      letter-spacing: .02em;
+    }
+
+    .storyline-modal .modal-body {
+      min-height: 0;
+      padding: 0;
+      background: #07111b;
+    }
+
+    .storyline-frame {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #07111b;
+    }
+
+    .storyline-close {
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: 999px;
+      padding: .45rem .8rem;
+      background: transparent;
+      color: var(--text);
+      font-size: .84rem;
+      font-weight: 650;
+      line-height: 1.1;
+    }
+
+    .storyline-close:hover,
+    .storyline-close:focus-visible {
+      border-color: var(--accent-2);
+      background: rgba(66, 193, 211, .13);
+      color: #fff;
+    }
+
+    @media (max-width: 575.98px) {
+      .storyline-modal .modal-dialog {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .storyline-modal .modal-content {
+        border: 0;
+        border-radius: 0;
+      }
+    }
+
     .project-facts {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -637,12 +711,11 @@
                   dynamischen Verhaltens führt – mit Animation, Video und Token Game.
                 </p>
                 <div class="card-actions">
-                  <a class="card-link"
-                     href="projects/petri-nets-revisited/story.html"
-                     target="_blank" rel="noopener"
-                     aria-label="Arbeitsprobe Petri Nets Revisited in einem neuen Tab starten">
-                    Arbeitsprobe starten ↗
-                  </a>
+                  <button type="button" class="card-link"
+                          data-bs-toggle="modal" data-bs-target="#storylineModal"
+                          aria-label="Arbeitsprobe Petri Nets Revisited im Portfolio öffnen">
+                    Arbeitsprobe starten
+                  </button>
                   <button type="button" class="context-link" data-bs-toggle="modal"
                           data-bs-target="#contextModal"
                           data-context-title="Petri Nets Revisited"
@@ -1096,6 +1169,28 @@
     </div>
   </footer>
 
+  <!-- Arbeitsprobe: nahezu bildschirmfüllende Storyline-Ansicht -->
+  <div class="modal fade storyline-modal" id="storylineModal" tabindex="-1"
+       aria-labelledby="storylineModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="storylineModalTitle">Petri Nets Revisited</h2>
+          <button type="button" class="storyline-close" data-bs-dismiss="modal"
+                  aria-label="Arbeitsprobe schließen und zum Portfolio zurückkehren">
+            ← Zurück zum Portfolio
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe class="storyline-frame" id="storylineFrame"
+                  title="Interaktive Arbeitsprobe Petri Nets Revisited"
+                  data-src="projects/petri-nets-revisited/story.html"
+                  src="about:blank" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Wiederverwendbares Projekt-Modal -->
   <div class="modal fade" id="projectModal" tabindex="-1"
        aria-labelledby="projectModalTitle" aria-hidden="true">
@@ -1501,6 +1596,18 @@ Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder G
 
       document.getElementById("contextDidactic").textContent = didacticIdea;
       document.getElementById("contextDidacticBlock").hidden = !didacticIdea;
+    });
+
+    // Storyline erst beim Öffnen laden und beim Schließen vollständig stoppen
+    const storylineModal = document.getElementById("storylineModal");
+    const storylineFrame = document.getElementById("storylineFrame");
+
+    storylineModal.addEventListener("show.bs.modal", () => {
+      storylineFrame.src = storylineFrame.dataset.src;
+    });
+
+    storylineModal.addEventListener("hidden.bs.modal", () => {
+      storylineFrame.src = "about:blank";
     });
 
     // Navigation nach Klick auf Mobilgeräten automatisch schließen
