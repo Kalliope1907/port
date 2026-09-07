@@ -1,10 +1,12 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-bs-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Arbeitsproben – Learning Design, interaktive Lernmedien, KI-gestützte Bildgestaltung, technische Umsetzung und Visualisierung">
+  <meta name="theme-color" content="#111111">
   <title>Julia Fleischer · Learning Design Portfolio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
   <!-- Bootstrap 5.3.8 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -18,11 +20,14 @@
       --surface: #181818;
       --surface-2: #202020;
       --text: #f1eee9;
-      --muted: #aaa59f;
-      --line: rgba(255,255,255,.12);
+      --muted: #c4bfb8;
+      --line: rgba(255,255,255,.18);
+      --line-strong: rgba(255,255,255,.34);
       --accent: #c9a36b;
+      --accent-2: #63d4e4;
       --accent-soft: rgba(201,163,107,.14);
       --max-width: 1180px;
+      color-scheme: dark;
     }
 
     html {
@@ -37,10 +42,13 @@
       color: var(--text);
       font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
       line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
       color: inherit;
+      text-underline-offset: .2em;
+      text-decoration-thickness: .08em;
     }
 
     :focus-visible {
@@ -76,7 +84,15 @@
       border-bottom: 1px solid var(--line);
     }
 
+    .navbar-toggler {
+      min-width: 44px;
+      min-height: 44px;
+    }
+
     .navbar-brand {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
       color: var(--text);
       font-size: .95rem;
       letter-spacing: .16em;
@@ -91,6 +107,7 @@
     .nav-link {
       color: var(--muted);
       font-size: .92rem;
+      padding-block: .7rem;
     }
 
     section {
@@ -128,6 +145,7 @@
     }
 
     .filter-btn {
+      min-height: 44px;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: transparent;
@@ -150,6 +168,8 @@
     }
 
     .portfolio-card {
+      display: flex;
+      flex-direction: column;
       height: 100%;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -412,6 +432,7 @@
     .external-case-link {
       display: inline-flex;
       align-items: center;
+      min-height: 44px;
       gap: .35rem;
       margin-top: 1.25rem;
       color: var(--accent);
@@ -443,6 +464,9 @@
     }
 
     .card-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
       padding: 1.5rem;
     }
 
@@ -464,7 +488,7 @@
 
     .card-text {
       color: var(--muted);
-      font-size: .93rem;
+      font-size: 1rem;
     }
 
     .card-actions {
@@ -472,18 +496,21 @@
       flex-wrap: wrap;
       align-items: center;
       gap: .75rem 1.1rem;
-      margin-top: .7rem;
+      margin-top: auto;
+      padding-top: 1rem;
     }
 
     .card-link,
     .context-link {
       appearance: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
       border: 0;
       border-bottom: 1px solid var(--accent);
       background: transparent;
       color: var(--text);
-      padding: 0;
+      padding: .4rem .1rem;
       font: inherit;
       text-decoration: none;
       cursor: pointer;
@@ -519,17 +546,72 @@
     }
 
     .modal-content {
-      background: #181818;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 1rem;
+      background: #1b1b1b;
       color: var(--text);
-      border: 1px solid var(--line);
+      box-shadow: 0 1.5rem 4rem rgba(0,0,0,.65);
     }
 
     .modal-header {
       border-color: var(--line);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .modal-title {
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      color: var(--text);
     }
 
     .btn-close {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      width: 44px;
+      height: 44px;
+      padding: .8rem;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      background-size: 1rem;
       filter: invert(1);
+      opacity: .9;
+    }
+
+    .btn-close:hover,
+    .btn-close:focus-visible {
+      border-color: var(--line-strong);
+      background-color: var(--surface-2);
+      opacity: 1;
+    }
+
+    .modal-backdrop.show {
+      opacity: .78;
+    }
+
+    .context-modal .modal-dialog {
+      max-width: 760px;
+    }
+
+    .context-modal .modal-body {
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .context-copy {
+      max-width: 68ch;
+      margin-top: .55rem;
+      color: var(--text);
+    }
+
+    .context-block + .context-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem !important;
+      border-top: 1px solid var(--line) !important;
     }
 
     .storyline-modal .modal-dialog {
@@ -575,7 +657,10 @@
     }
 
     .storyline-close {
+      display: inline-flex;
       flex: 0 0 auto;
+      align-items: center;
+      min-height: 44px;
       border: 1px solid rgba(255, 255, 255, .35);
       border-radius: 999px;
       padding: .45rem .8rem;
@@ -594,6 +679,23 @@
     }
 
     @media (max-width: 575.98px) {
+      section {
+        padding: 4.5rem 0;
+      }
+
+      .modal:not(.storyline-modal) .modal-dialog {
+        margin: .5rem;
+      }
+
+      .modal:not(.storyline-modal) .modal-header,
+      .modal:not(.storyline-modal) .modal-body {
+        padding: 1rem;
+      }
+
+      .context-modal .modal-body {
+        font-size: 1rem;
+      }
+
       .storyline-modal .modal-dialog {
         width: 100vw;
         height: 100vh;
@@ -643,6 +745,18 @@
       *::after {
         transition-duration: .01ms !important;
         animation-duration: .01ms !important;
+      }
+
+      .portfolio-card:hover {
+        transform: none;
+      }
+    }
+
+    @media (prefers-contrast: more) {
+      :root {
+        --muted: #fff;
+        --line: rgba(255,255,255,.45);
+        --line-strong: rgba(255,255,255,.7);
       }
     }
   </style>
@@ -1017,39 +1131,7 @@
     </div>
   </div>
 
-  <!-- Wiederverwendbares Projekt-Modal -->
-  <div class="modal fade" id="projectModal" tabindex="-1"
-       aria-labelledby="projectModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div>
-            <div class="category" id="projectModalType">Arbeitsprobe</div>
-            <h2 class="modal-title fs-3 mt-1" id="projectModalTitle">Projekt</h2>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"
-                  aria-label="Schließen"></button>
-        </div>
-
-        <div class="modal-body">
-          <p id="projectModalDescription" class="text-secondary-emphasis"></p>
-
-          <div class="project-facts">
-            <div class="project-fact">
-              <small>Mein Beitrag</small>
-              <div id="projectModalRole"></div>
-            </div>
-            <div class="project-fact">
-              <small>Werkzeuge / Technik</small>
-              <div id="projectModalTech"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="contextModal" tabindex="-1"
+  <div class="modal fade context-modal" id="contextModal" tabindex="-1"
        aria-labelledby="contextModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -1063,15 +1145,15 @@
         </div>
 
         <div class="modal-body">
-          <section class="p-0 border-0" aria-labelledby="contextRequirementTitle">
+          <section class="context-block p-0 border-0" aria-labelledby="contextRequirementTitle">
             <h3 class="fs-5" id="contextRequirementTitle">Anforderung</h3>
-            <p id="contextRequirement" class="text-secondary-emphasis mb-0"></p>
+            <p id="contextRequirement" class="context-copy mb-0"></p>
           </section>
 
-          <section class="p-0 border-0 mt-4" id="contextDidacticBlock"
+          <section class="context-block p-0 border-0" id="contextDidacticBlock"
                    aria-labelledby="contextDidacticTitle">
             <h3 class="fs-5" id="contextDidacticTitle">Didaktische Idee</h3>
-            <p id="contextDidactic" class="text-secondary-emphasis mb-0"></p>
+            <p id="contextDidactic" class="context-copy mb-0"></p>
           </section>
         </div>
       </div>
@@ -1381,29 +1463,6 @@ Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder G
 
         updateFilterStatus(visibleCount);
       });
-    });
-
-    // Wiederverwendbares Modal mit den Daten der gewählten Arbeitsprobe füllen
-    const projectModal = document.getElementById("projectModal");
-
-    projectModal.addEventListener("show.bs.modal", event => {
-      const trigger = event.relatedTarget;
-      if (!trigger) return;
-
-      document.getElementById("projectModalTitle").textContent =
-        trigger.dataset.title || "Arbeitsprobe";
-
-      document.getElementById("projectModalType").textContent =
-        trigger.dataset.type || "Arbeitsprobe";
-
-      document.getElementById("projectModalRole").textContent =
-        trigger.dataset.role || "–";
-
-      document.getElementById("projectModalTech").textContent =
-        trigger.dataset.tech || "–";
-
-      document.getElementById("projectModalDescription").textContent =
-        trigger.dataset.description || "";
     });
 
     const contextModal = document.getElementById("contextModal");
