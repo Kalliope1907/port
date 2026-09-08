@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const sourceFile = "6e6P96fcVhL.png";
+  const sourceFile = "6e6P96fcVhL-static.png";
   const optimizedFile = "mobile/6e6P96fcVhL.webp";
   const xlinkNamespace = "http://www.w3.org/1999/xlink";
   const optimizedUrl = new URL(optimizedFile, document.baseURI).href;
@@ -25,31 +25,11 @@
     document.querySelectorAll("svg image").forEach(replaceSource);
   }
 
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes") {
-        replaceSource(mutation.target);
-        continue;
-      }
-
-      for (const node of mutation.addedNodes) {
-        if (!(node instanceof Element)) continue;
-        replaceSource(node);
-        node.querySelectorAll?.("svg image").forEach(replaceSource);
-      }
-    }
-  });
-
-  observer.observe(document.documentElement, {
-    attributes: true,
-    childList: true,
-    subtree: true,
-  });
-
   const preload = new Image();
   preload.addEventListener("load", () => {
     optimizedAssetReady = true;
     replaceExistingSources();
+    window.setInterval(replaceExistingSources, 500);
   });
   preload.src = optimizedUrl;
 })();
