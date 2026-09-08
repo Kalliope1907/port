@@ -137,36 +137,6 @@
       color: var(--muted);
     }
 
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .65rem;
-      margin: 2.4rem 0 2rem;
-    }
-
-    .filter-btn {
-      min-height: 44px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: transparent;
-      color: var(--muted);
-      padding: .55rem .95rem;
-      transition: .2s ease;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-      color: var(--text);
-    }
-
-    .filter-btn.active {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #173a56;
-      font-weight: 700;
-    }
-
     .portfolio-card {
       display: flex;
       flex-direction: column;
@@ -729,8 +699,14 @@
       font-size: .88rem;
     }
 
-    .is-hidden {
-      display: none !important;
+    footer a {
+      color: inherit;
+      text-decoration-color: rgba(255,255,255,.28);
+      text-underline-offset: .2em;
+    }
+
+    footer a:hover {
+      color: var(--text);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -783,26 +759,15 @@
   </nav>
 
   <main id="top">
-    <h1 class="visually-hidden">Learning Design Portfolio – Julia Fleischer</h1>
+    <h1 class="visually-hidden">Learning Design &amp; Development Portfolio – Julia Fleischer</h1>
 
     <section id="arbeiten">
       <div class="container-xl">
         <div class="section-kicker">Portfolio</div>
         <h2 class="section-title">Ausgewählte Arbeiten</h2>
         <p class="section-intro">
-          Arbeitsproben, didaktische Entscheidung &amp; technische Umsetzung.
+          Sechs Arbeitsproben aus Learning Design, Entwicklung und visueller Gestaltung.
         </p>
-
-        <div class="filter-bar" role="group" aria-label="Arbeitsproben filtern">
-          <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">Alle</button>
-          <button type="button" class="filter-btn" data-filter="didaktik" aria-pressed="false">Didaktik</button>
-          <button type="button" class="filter-btn" data-filter="interaktiv" aria-pressed="false">Interaktive Medien</button>
-          <button type="button" class="filter-btn" data-filter="grafik" aria-pressed="false">Grafik</button>
-          <button type="button" class="filter-btn" data-filter="ki" aria-pressed="false">KI &amp; Bild</button>
-          <button type="button" class="filter-btn" data-filter="technik" aria-pressed="false">Technik</button>
-        </div>
-
-        <p id="filterStatus" class="visually-hidden" aria-live="polite"></p>
 
         <div class="row g-4" id="portfolioGrid">
 
@@ -818,7 +783,8 @@
                 <div class="category">Learning Design · Storyline · Petri-Netze</div>
                 <h3 class="card-title">Petri Nets Revisited</h3>
                 <p class="card-text">
-                  Didaktisch aufbereitete Präsentationsfolien zum Thema Prozessmodellierung auf Englisch (gekürzte Version). 
+                  Didaktisch aufbereitete, englischsprachige Präsentationsfolien zur
+                  Prozessmodellierung – hier als gekürzte interaktive Arbeitsprobe.
                 </p>
                 <div class="card-actions">
                   <button type="button" class="card-link"
@@ -851,7 +817,8 @@
                 <div class="category">Learning Design · Logik · Interaktiv</div>
                 <h3 class="card-title">Robo und die Energiewege</h3>
                 <p class="card-text">
-                  Kleine Sammlung an Knobelspielen für Kinder die spielerisch an Themen der Informatik anknüpfen. 
+                  Eine Sammlung browserbasierter Knobelspiele, die Kinder spielerisch an
+                  Logik, Binärcodes und weitere Informatikthemen heranführt.
                 </p>
                 <div class="card-actions">
                   <button type="button" class="card-link"
@@ -884,8 +851,8 @@
                 <div class="category">KI-Ausgang · Photoshop · Headerdesign</div>
                 <h3 class="card-title">Vom KI-Entwurf zum Konferenzheader</h3>
                 <p class="card-text">
-                  Aus einem KI-Ausgangsbild wurde nach Photoshop-Bearbeitung und zeichnerische
-                  Eingriffe ein Konferenzheader.
+                  Durch Photoshop-Bearbeitung und zeichnerische Eingriffe wurde aus einem
+                  KI-Ausgangsbild ein veröffentlichter Konferenzheader.
                 </p>
                 <div class="card-actions">
                   <button type="button" class="card-link" data-bs-toggle="modal"
@@ -897,7 +864,7 @@
                           data-bs-target="#contextModal"
                           data-context-title="Vom KI-Entwurf zum Konferenzheader"
                           data-requirement="Für den PEnGE-Workshop 2025 sollte aus einem KI-generierten Clownmotiv ein veröffentlichungsfähiger, prägnanter Website-Header entstehen."
-                          data-didactic=""
+                          data-didactic="Das KI-Motiv diente als Ausgangspunkt; Komposition, Kontrast, Typografie und zeichnerische Details wurden anschließend gezielt in Photoshop ausgearbeitet."
                           aria-label="Kontext zum Konferenzheader PEnGE">
                     Kontext
                   </button>
@@ -926,8 +893,8 @@
                 <div class="category">Illustrator · Bézier · 3D</div>
                 <h3 class="card-title">Illustrator-Fachillustrationen</h3>
                 <p class="card-text">
-                  Fahrrad und Nussknacker wurden freihändig nach Vorlage konstruiert
-                  und für Physikaufgaben mit Raster und Kraftvektoren ergänzt.
+                  Fahrrad und Nussknacker wurden in Illustrator nach visuellen Vorlagen
+                  konstruiert und für Physikaufgaben um Raster und Kraftvektoren ergänzt.
                 </p>
                 <div class="card-actions">
                   <button type="button" class="card-link" data-bs-toggle="modal"
@@ -969,7 +936,8 @@
                 <div class="category">LaTeX · TikZ · Vektorgrafik</div>
                 <h3 class="card-title">Parametrische Fachgrafiken mit TikZ</h3>
                 <p class="card-text">
-                  Diagramme und andere konstruierbare Grafiken lassen sich mit TikZ direkt aus Code erzeugen.
+                  Parametrische Diagramme und Fachgrafiken lassen sich mit TikZ präzise,
+                  skalierbar und reproduzierbar direkt aus Code erzeugen.
                 </p>
                 <div class="card-actions">
                   <button type="button" class="card-link" data-bs-toggle="modal"
@@ -1010,8 +978,8 @@
                 <div class="category">Handskizze · Prompt Design · KI-Bild</div>
                 <h3 class="card-title">Vom Bleistift zum Bildstil</h3>
                 <p class="card-text">
-                  Eine eigene handgezeichnete Chamäleon-Skizze als Ausgangspunkt
-                  für vier KI-generierte, visuelle Interpretationen.
+                  Eine eigene Chamäleon-Skizze bildet die Grundlage für vier KI-generierte
+                  visuelle Interpretationen mit kontrollierter Pose und Komposition.
                 </p>
                 <div class="card-actions">
                   <button type="button" class="card-link" data-bs-toggle="modal"
@@ -1023,7 +991,7 @@
                           data-bs-target="#contextModal"
                           data-context-title="Vom Bleistift zum Bildstil"
                           data-requirement="Aus einer eigenen Handskizze sollten mehrere stilistisch unterschiedliche, aber kompositorisch konsistente Bildvarianten entstehen."
-                          data-didactic=""
+                          data-didactic="Pose, Blickrichtung und Bildaufbau blieben konstant, während Medium, Material, Licht und Farbwelt über Varianten gezielt verändert wurden."
                           aria-label="Kontext zum Chamäleon-Gestaltungsprozess">
                     Kontext
                   </button>
@@ -1037,30 +1005,30 @@
 
     <section id="technik">
       <div class="container-xl">
-        <div class="section-kicker">Technische Umsetzung</div>
-        <h2 class="visually-hidden">Technische Umsetzung</h2>
+        <div class="section-kicker">Technische Umsetzung dieser Portfolioseite</div>
+        <h2 class="visually-hidden">Technische Umsetzung dieser Portfolioseite</h2>
 
         <div class="tech-strip mt-4">
           <div class="row g-4">
-            <div class="col-6 col-lg-3">
+            <div class="col-6 col-lg">
               <div class="tech-label">Struktur</div>
               <div class="tech-value">HTML5</div>
             </div>
-            <div class="col-6 col-lg-3">
+            <div class="col-6 col-lg">
               <div class="tech-label">Framework</div>
               <div class="tech-value">Bootstrap 5</div>
             </div>
-            <div class="col-6 col-lg-3">
+            <div class="col-6 col-lg">
               <div class="tech-label">Design</div>
               <div class="tech-value">CSS</div>
             </div>
-            <div class="col-6 col-lg-3">
+            <div class="col-6 col-lg">
               <div class="tech-label">Interaktion</div>
               <div class="tech-value">Vanilla JavaScript</div>
             </div>
-            <div class="col-6 col-lg-3">
-              <div class="tech-label">KI</div>
-              <div class="tech-value">ChatGPT+/Codex</div>
+            <div class="col-12 col-sm-6 col-lg">
+              <div class="tech-label">KI-Unterstützung</div>
+              <div class="tech-value">ChatGPT · Codex</div>
             </div>
           </div>
         </div>
@@ -1070,8 +1038,8 @@
 
   <footer>
     <div class="container-xl d-flex flex-column flex-md-row justify-content-between gap-2">
-      <span>Julia Fleischer · Learning Design Portfolio</span>
-      <span>Arbeitsproben · 2026</span>
+      <span>Julia Fleischer · Learning Design &amp; Development Portfolio</span>
+      <span><a href="mailto:julia-anna.fleischer@pm.me">julia-anna.fleischer@pm.me</a> · 2026</span>
     </div>
   </footer>
 
@@ -1140,7 +1108,7 @@
 
           <section class="context-block p-0 border-0" id="contextDidacticBlock"
                    aria-labelledby="contextDidacticTitle">
-            <h3 class="fs-5" id="contextDidacticTitle">Didaktische Idee</h3>
+            <h3 class="fs-5" id="contextDidacticTitle">Entscheidung / Herangehensweise</h3>
             <p id="contextDidactic" class="context-copy mb-0"></p>
           </section>
         </div>
@@ -1229,7 +1197,7 @@
         <div class="modal-body">
           <p class="section-intro">
             Fahrrad und Nussknacker habe ich nach visuellen Vorlagen in Adobe
-            Illustrator mit Bezierwerkzeugen und 3D-Filter und Texturierung aufgebaut. 
+            Illustrator mit Bézier-Werkzeugen, 3D-Effekten und Texturen aufgebaut.
           </p>
 
           <div class="project-facts">
@@ -1286,7 +1254,8 @@
             Das gezeigte Diagramm wird direkt aus LaTeX-/TikZ-Code erzeugt. Positionen,
             Umlaufbahnen, Knoten und Verbindungen werden über Koordinaten und Winkel
             definiert und anschließend als saubere Vektorgrafik kompiliert.
-          Dadurch lassen sich sehr genaue Grafiken erstellen und direkt in LaTeX verfasste Dokumente einbinden, was in mamchen Fällen verschiedene Vorteile hat.
+            Dadurch entstehen präzise, skalierbare Grafiken, die sich direkt in
+            LaTeX-Dokumente integrieren und bei Änderungen reproduzierbar aktualisieren lassen.
           </p>
 
           <div class="project-facts">
@@ -1416,42 +1385,6 @@ Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder G
           crossorigin="anonymous"></script>
 
   <script>
-    // Portfolio-Filter
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const portfolioItems = document.querySelectorAll(".portfolio-item");
-    const filterStatus = document.getElementById("filterStatus");
-
-    const updateFilterStatus = visibleCount => {
-      filterStatus.textContent = visibleCount === 1
-        ? "1 Arbeitsprobe angezeigt."
-        : `${visibleCount} Arbeitsproben angezeigt.`;
-    };
-
-    updateFilterStatus(portfolioItems.length);
-
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
-        let visibleCount = 0;
-
-        filterButtons.forEach(btn => {
-          btn.classList.remove("active");
-          btn.setAttribute("aria-pressed", "false");
-        });
-        button.classList.add("active");
-        button.setAttribute("aria-pressed", "true");
-
-        portfolioItems.forEach(item => {
-          const categories = item.dataset.category.split(" ");
-          const show = filter === "all" || categories.includes(filter);
-          item.classList.toggle("is-hidden", !show);
-          if (show) visibleCount += 1;
-        });
-
-        updateFilterStatus(visibleCount);
-      });
-    });
-
     const contextModal = document.getElementById("contextModal");
 
     contextModal.addEventListener("show.bs.modal", event => {
