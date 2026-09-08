@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robo und die Energiewege – Der kürzeste Energiepfad</title>
+  <link rel="stylesheet" href="css/style.css?v=2.4.0" />
+</head>
+<body>
+<main class="game-shell">
+  <header class="game-header">
+    <div>
+      <p class="kicker">STROM, WEGE &amp; SCHALTEN</p>
+      <h1>Der kürzeste Energiepfad</h1>
+      <p class="mission-copy">Robo muss durch die Stadt. Jede Leitung kostet Energie. Finde Wege, die möglichst wenig Akku verbrauchen.</p>
+    </div>
+    <a class="hub-link" href="index.html#spiele">← Spiele</a>
+    <div class="level-panel" data-difficulty="2" aria-label="Schwierigkeit 2 von 3">
+      <div class="level-row"><span>Schwierigkeit</span><span id="scoreLabel">★★☆</span></div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar" style="width:0%"></div></div>
+    </div>
+  </header>
+
+  <section class="game-grid">
+    <section class="play-card">
+      <div class="card-head">
+        <div><p class="kicker dark">ROBO-STADT</p><h2 id="routeQuestion">Wie kommt Robo mit wenig Energie ans Ziel?</h2></div>
+        <button id="resetBtn" class="pill-button" type="button">↻ Neu starten</button>
+      </div>
+
+      <div class="route-stage">
+        <div class="route-missionbar">
+          <div><small>MISSION</small><strong id="routeMission">1 von 3</strong></div>
+          <div><small>START</small><strong id="routeStartLabel">Robo-Hub</strong></div>
+          <div><small>ZIEL</small><strong id="routeTargetLabel">Brücke</strong></div>
+          <div class="route-cost"><small>ENERGIE</small><strong><span id="routeCost">0</span> ⚡</strong></div>
+        </div>
+        <div id="routeMap" class="route-map" aria-label="Stadtplan mit Energiestationen und Leitungen"></div>
+        <div class="route-bottomline">
+          <span id="routePathLabel">Robo-Hub</span>
+          <button id="undoRouteBtn" class="route-undo" type="button">↶ letzten Schritt zurück</button>
+        </div>
+      </div>
+
+      <div class="game-footer">
+        <span>Die Zahl an einer Leitung zeigt, wie viel Energie sie kostet.</span>
+        <button id="profiBtn" class="text-button expert-toggle" type="button" aria-expanded="false">🧠 Expertenmodus</button>
+      </div>
+      <div id="profiBox" class="profi-box expert-box" hidden>
+        <div class="expert-box-head"><span>🧠</span><div><strong>Expertenmodus</strong><small>Graphen und kürzeste Wege</small></div></div>
+        <p><strong>Was lernst du hier?</strong> Nicht der geometrisch kürzeste Weg ist automatisch der günstigste. Entscheidend sind die Kosten der einzelnen Verbindungen.</p>
+        <p><strong>Informatik dahinter:</strong> Der Stadtplan ist ein <strong>gewichteter Graph</strong>. Stationen sind Knoten, Leitungen sind Kanten und die Zahlen daran sind Kantengewichte. Gesucht ist ein Weg mit minimaler Summe der Gewichte.</p>
+        <p><strong>Ein berühmter Algorithmus:</strong> Der <strong>Dijkstra-Algorithmus</strong> berechnet kürzeste Wege in Graphen mit nichtnegativen Kantengewichten. Solche Verfahren stecken in Navigation, Netzwerken und vielen Optimierungsproblemen.</p>
+      </div>
+    </section>
+
+    <aside class="robo-card">
+      <div class="robo-top">
+        <div class="avatar-orbit" id="avatarOrbit" data-mood="greeting"><div class="avatar-circle"><div class="avatar-inner"><img src="assets/robot/robo-bust.png" alt="Robo"><span class="eyelid eyelid-left"></span><span class="eyelid eyelid-right"></span><span class="mouth-live"></span></div></div><div class="signal-dot"></div></div>
+        <div><p class="kicker dark">DEIN SPIELBEGLEITER</p><h2>Robo</h2></div>
+      </div>
+      <div id="speechBubble" class="speech-bubble">Schau nicht nur darauf, was nah aussieht. Die kleinen Zahlen an den Leitungen verraten den Energieverbrauch.</div>
+      <div class="voice-row" id="voiceControls"><button id="speakBtn" class="voice-button" type="button">🔊 Vorlesen</button><label><input id="autoSpeakToggle" type="checkbox" checked> automatisch</label><select id="voiceSelect"></select></div>
+      <div class="robo-actions"><button id="hintBtn" class="primary-button" type="button">💡 Hinweis</button><button id="explainBtn" class="secondary-button" type="button">Wie finde ich einen guten Weg?</button></div>
+      <form id="questionForm" class="question-form"><label for="questionInput">Frag Robo</label><div class="input-row"><input id="questionInput" autocomplete="off" placeholder="Zum Beispiel: Warum ist der direkte Weg nicht immer besser?"><button>→</button></div><small id="aiStatus">Offline-Robo kennt das Spiel.</small></form>
+      <div class="strategy-card"><div class="strategy-title">Dein Auftrag</div><div class="strategy-row"><span>Mission</span><strong id="sideRound">1 von 3</strong></div><div class="strategy-row"><span>Deine Energie</span><strong id="sideCost">0 ⚡</strong></div><div class="strategy-row"><span>Optimale Missionen</span><strong id="optimalRounds">0 / 3</strong></div></div>
+      <div id="rewardPanel" class="reward-panel" hidden><div id="rewardStars" class="reward-stars">★★★</div><strong>Routen-Profi!</strong><span id="rewardText"></span><button id="replayBtn" class="next-button" type="button">Noch einmal</button><a class="next-button link-button category-next" href="level10.html">Nächstes Level: Robo-Lügendetektor →</a><a class="next-button link-button subtle-link" href="index.html#spiele">Zur Spielauswahl</a></div>
+    </aside>
+  </section>
+</main>
+<script src="api/tutor-api.js"></script><script src="js/presentation.js?v=2.4.0"></script><script src="js/progress.js"></script><script src="js/binary-common.js?v=2.4.0"></script><script src="js/level9.js?v=2.4.0"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

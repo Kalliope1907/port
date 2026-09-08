@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robo und die Energiewege – Der Energie-Mix</title>
+  <link rel="stylesheet" href="css/style.css?v=2.4.0" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="game-header">
+      <div>
+        <p class="kicker">ROBO UND DIE ENERGIEWEGE</p>
+        <h1>Der Energie-Mix</h1>
+        <p class="mission-copy">Acht Roboter tragen drei verschiedene Energie-Farben. Bringe <strong>alle acht auf dieselbe Energie-Farbe</strong>.</p>
+      </div>
+      <a class="hub-link" href="index.html#spiele">← Spiele</a>
+      <div class="level-panel" data-difficulty="2" aria-label="Schwierigkeit 2 von 3">
+        <div class="level-row"><span>Schwierigkeit</span><span id="scoreLabel">★★☆</span></div>
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      </div>
+    </header>
+
+    <section class="game-grid">
+      <section class="play-card" aria-labelledby="playTitle">
+        <div class="card-head">
+          <div>
+            <p class="kicker dark">ENERGIE-MISCHUNG</p>
+            <h2 id="playTitle">Kannst du alle auf eine Farbe bringen?</h2>
+          </div>
+          <div class="card-head-actions">
+            <a class="pill-link" href="index.html#spiele">← Spiele</a>
+            <button id="resetBtn" class="pill-button" type="button">↻ Neu starten</button>
+          </div>
+        </div>
+
+        <div class="game-stage mix-stage" id="gameStage">
+          <svg id="mixBoard" class="board mix-board" viewBox="0 0 900 650" role="img" aria-label="Acht Roboter mit roten, grünen und blauen Energie-Farben">
+            <defs>
+              <filter id="mixGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <circle class="mix-guide" cx="450" cy="322" r="255" />
+            <g id="transferLayer"></g>
+            <g id="mixRobotLayer"></g>
+            <g class="mix-center" transform="translate(450 322)">
+              <circle r="92" class="mix-center-disc"/>
+              <text class="mix-center-title" y="-42">Energie-Farben</text>
+              <text id="redCount" class="mix-count red" x="-48" y="-7">5</text>
+              <text id="greenCount" class="mix-count green" x="0" y="-7">2</text>
+              <text id="blueCount" class="mix-count blue" x="48" y="-7">1</text>
+              <circle cx="-48" cy="15" r="7" fill="#d85146"/><circle cx="0" cy="15" r="7" fill="#3dae78"/><circle cx="48" cy="15" r="7" fill="#3284cf"/>
+              <text id="bestGroup" class="mix-center-sub" y="48">größte Gruppe: 5 / 8</text>
+              <text class="mix-center-sub" y="68">Ziel: 8 gleiche</text>
+            </g>
+          </svg>
+          <div class="mission-tip" id="missionTip"><strong>So geht's:</strong> Wähle zwei Roboter mit <strong>verschiedenen</strong> Energie-Farben. Beim Energieaustausch bekommen <strong>beide die dritte Farbe</strong>.</div>
+        </div>
+
+        <div class="mix-rules" aria-label="Energie-Regeln">
+          <div class="mix-rule"><span class="energy-chip red"></span> + <span class="energy-chip green"></span><span class="energy-arrow">→</span><span class="energy-chip blue"></span><span class="energy-chip blue"></span></div>
+          <div class="mix-rule"><span class="energy-chip red"></span> + <span class="energy-chip blue"></span><span class="energy-arrow">→</span><span class="energy-chip green"></span><span class="energy-chip green"></span></div>
+          <div class="mix-rule"><span class="energy-chip green"></span> + <span class="energy-chip blue"></span><span class="energy-arrow">→</span><span class="energy-chip red"></span><span class="energy-chip red"></span></div>
+        </div>
+
+        <div class="game-footer">
+          <div class="energy-key"><span class="energy-chip red"></span><span>rote Energie</span></div>
+          <div class="energy-key"><span class="energy-chip green"></span><span>grüne Energie</span></div>
+          <div class="energy-key"><span class="energy-chip blue"></span><span>blaue Energie</span></div>
+          <div class="mix-counter">Austausche: <strong id="moveCount">0</strong></div>
+          <button id="profiBtn" class="text-button expert-toggle" type="button" aria-expanded="false">🧠 Expertenmodus</button>
+        </div>
+        <div id="profiBox" class="profi-box expert-box" hidden>
+          <div class="expert-box-head"><span>🧠</span><div><strong>Expertenmodus</strong><small>Zustände, Transitionen und Erreichbarkeit</small></div></div>
+          <p><strong>Was lernst du hier?</strong> Jede lokale Farbänderung verändert den Gesamtzustand. Um alle Roboter auf eine Farbe zu bringen, musst du deshalb nicht nur den nächsten Zug, sondern mögliche spätere Zustände mitdenken.</p>
+          <p><strong>Informatik dahinter:</strong> Das Farbtausch-Spiel lässt sich sehr kompakt als <strong>Petri-Netz</strong> modellieren. Drei Stellen speichern die Anzahlen der drei Energie-Farben. Eine Transition verbraucht je einen Token aus zwei verschiedenen Stellen und erzeugt <strong>zwei Token</strong> in der dritten – daher die gewichtete Kante mit Gewicht 2. Die Frage „Kann ich von diesem Zustand noch zum Ziel gelangen?“ ist eine Form des <strong>Erreichbarkeitsproblems</strong>, eines zentralen Themas der Petri-Netz-Theorie.</p>
+        </div>
+      </section>
+
+      <aside class="robo-card">
+        <div class="robo-top">
+          <div class="avatar-orbit" id="avatarOrbit" data-mood="greeting">
+            <div class="avatar-circle"><div class="avatar-inner" id="avatarInner">
+              <img src="assets/robot/robo-bust.png" alt="Robo, dein Spielbegleiter" />
+              <span class="eyelid eyelid-left" aria-hidden="true"></span><span class="eyelid eyelid-right" aria-hidden="true"></span><span class="mouth-live" aria-hidden="true"></span>
+            </div></div><div class="signal-dot" aria-hidden="true"></div>
+          </div>
+          <div><p class="kicker dark">DEIN SPIELBEGLEITER</p><h2>Robo</h2></div>
+        </div>
+
+        <div class="speech-bubble" id="speechBubble" aria-live="polite">Zwei verschiedene Energie-Farben ergeben gemeinsam die dritte. Klingt einfach – aber welche Reihenfolge bringt wirklich alle zusammen?</div>
+
+        <div class="voice-row" id="voiceControls">
+          <button id="speakBtn" class="voice-button" type="button">🔊 Vorlesen</button>
+          <label><input id="autoSpeakToggle" type="checkbox" checked /> automatisch</label>
+          <select id="voiceSelect" aria-label="Deutsche Stimme"></select>
+        </div>
+
+        <div class="robo-actions">
+          <button id="hintBtn" class="primary-button" type="button">💡 Hinweis</button>
+          <button id="explainBtn" class="secondary-button" type="button">Was passiert hier?</button>
+        </div>
+
+        <form id="questionForm" class="question-form">
+          <label for="questionInput">Frag Robo</label>
+          <div class="input-row"><input id="questionInput" type="text" autocomplete="off" placeholder="Zum Beispiel: Warum werden beide blau?" /><button type="submit" aria-label="Frage senden">→</button></div>
+          <small id="aiStatus">Offline-Robo kennt das Spiel und ein bisschen Smalltalk.</small>
+        </form>
+
+        <div class="strategy-card">
+          <div class="strategy-title">Dein Auftrag</div>
+          <div class="strategy-row"><span>Roboter</span><strong>8</strong></div>
+          <div class="strategy-row"><span>Größte Farbgruppe</span><strong id="groupLabel">5 von 8</strong></div>
+          <div class="strategy-row"><span>3 Sterne</span><strong>5 Austausche</strong></div>
+        </div>
+
+        <div class="reward-panel" id="rewardPanel" hidden>
+          <div class="reward-stars" id="rewardStars">★★★</div>
+          <strong>Alle acht haben dieselbe Energie!</strong>
+          <span id="rewardText">Du hast die Energie-Farben geschickt gemischt.</span>
+          <button id="replayBtn" class="next-button" type="button">Noch einmal spielen</button>
+          <a class="next-button link-button category-next" href="level5.html">Nächstes Farbenergie-Level →</a><a class="next-button link-button subtle-link" href="index.html#spiele">Zur Spielauswahl</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <script src="api/tutor-api.js"></script>
+  <script src="js/presentation.js?v=2.4.0"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/level4.js?v=2.4.0"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

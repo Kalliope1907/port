@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title">
+  <title id="title">Stromleitung mit Messpunkten</title>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#e8f7f5"/><stop offset="1" stop-color="#f8f1e5"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect x="35" y="54" width="570" height="252" rx="28" fill="#fff" opacity=".72"/>
+  <circle cx="92" cy="180" r="39" fill="#fff" stroke="#315b68" stroke-width="8"/><text x="92" y="194" text-anchor="middle" font-size="38">⚡</text>
+  <path d="M131 180H540" stroke="#dcb32e" stroke-width="18" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M378 180h38" stroke="#d85146" stroke-width="20" stroke-dasharray="10 12"/>
+  <g font-family="Arial" text-anchor="middle" font-weight="700"><g transform="translate(230 180)"><circle r="30" fill="#dff5e8" stroke="#3dae78" stroke-width="7"/><text y="9" font-size="26" fill="#207a50">✓</text><text y="55" font-size="14" fill="#47636e">TEST</text></g><g transform="translate(430 180)"><circle r="30" fill="#fde3df" stroke="#d85146" stroke-width="7"/><text y="9" font-size="27" fill="#b54239">×</text><text y="55" font-size="14" fill="#47636e">TEST</text></g></g>
+  <circle cx="562" cy="180" r="39" fill="#fff" stroke="#315b68" stroke-width="8"/><text x="562" y="194" text-anchor="middle" font-size="38">💡</text>
+  <text x="320" y="99" text-anchor="middle" font-family="Arial" font-size="25" font-weight="800" fill="#17324d">FEHLER EINGRENZEN</text>
+</svg>

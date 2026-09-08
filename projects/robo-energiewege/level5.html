@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robo und die Energiewege – Die große Farbmaschine</title>
+  <link rel="stylesheet" href="css/style.css?v=2.4.0" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="game-header">
+      <div>
+        <p class="kicker">ROBO UND DIE ENERGIEWEGE</p>
+        <h1>Die große Farbmaschine</h1>
+        <p class="mission-copy">23 Roboter, drei Energie-Farben – diesmal steuerst du das Netz direkt. Bringe <strong>alle Roboter auf dieselbe Energie-Farbe</strong>.</p>
+      </div>
+      <a class="hub-link" href="index.html#spiele">← Spiele</a>
+      <div class="level-panel" data-difficulty="3" aria-label="Schwierigkeit 3 von 3">
+        <div class="level-row"><span>Schwierigkeit</span><span id="scoreLabel">★★★</span></div>
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      </div>
+    </header>
+
+    <section class="game-grid">
+      <section class="play-card" aria-labelledby="playTitle">
+        <div class="card-head">
+          <div>
+            <p class="kicker dark">DIREKT AM PETRI-NETZ</p>
+            <h2 id="playTitle">Welche Transition klickst du als Nächstes?</h2>
+          </div>
+          <div class="card-head-actions">
+            <a class="pill-link" href="index.html#spiele">← Spiele</a>
+            <button id="resetBtn" class="pill-button" type="button">↻ Neu starten</button>
+          </div>
+        </div>
+
+        <div class="game-stage petri-mix-stage" id="gameStage">
+          <svg id="petriBoard" class="board petri-mix-board" viewBox="0 0 900 660" role="img" aria-label="Petri-Netz mit drei Energie-Farben und drei klickbaren Transitionen">
+            <defs>
+              <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#697d87"></path>
+              </marker>
+              <filter id="petriGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="5" result="blur" />
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <g id="arcLayer" class="petri-arcs">
+              <!-- Blau + Rot -> 2 Grün -->
+              <path id="arc-b-rb" class="petri-arc" d="M395 167 Q282 153 209 225" marker-end="url(#arrowHead)"/>
+              <path id="arc-r-rb" class="petri-arc" d="M190 356 Q157 320 176 278" marker-end="url(#arrowHead)"/>
+              <path id="arc-rb-g" class="petri-arc output-arc green-out" d="M210 253 Q432 276 600 386" marker-end="url(#arrowHead)"/>
+              <g class="weight-badge" transform="translate(504 314)"><circle r="17"></circle><text y="6">2</text></g>
+
+              <!-- Blau + Grün -> 2 Rot -->
+              <path id="arc-b-gb" class="petri-arc" d="M505 167 Q618 153 691 225" marker-end="url(#arrowHead)"/>
+              <path id="arc-g-gb" class="petri-arc" d="M710 356 Q743 320 724 278" marker-end="url(#arrowHead)"/>
+              <path id="arc-gb-r" class="petri-arc output-arc red-out" d="M690 253 Q468 276 300 386" marker-end="url(#arrowHead)"/>
+              <g class="weight-badge" transform="translate(396 314)"><circle r="17"></circle><text y="6">2</text></g>
+
+              <!-- Rot + Grün -> 2 Blau -->
+              <path id="arc-r-rg" class="petri-arc" d="M286 466 Q350 535 416 559" marker-end="url(#arrowHead)"/>
+              <path id="arc-g-rg" class="petri-arc" d="M614 466 Q550 535 484 559" marker-end="url(#arrowHead)"/>
+              <path id="arc-rg-b" class="petri-arc output-arc blue-out" d="M450 547 C447 438 453 316 450 222" marker-end="url(#arrowHead)"/>
+              <g class="weight-badge" transform="translate(474 356)"><circle r="17"></circle><text y="6">2</text></g>
+            </g>
+
+            <g id="place-blue" class="petri-place blue-place" transform="translate(450 126)">
+              <circle class="place-halo" r="103"></circle><circle class="place-disc" r="88"></circle>
+              <g id="robots-blue" class="mini-robot-layer"></g>
+              <g class="place-count-badge" transform="translate(69 -66)"><circle r="24"></circle><text id="blueBigCount" y="7">3</text></g>
+            </g>
+            <g id="place-red" class="petri-place red-place" transform="translate(220 423)">
+              <circle class="place-halo" r="103"></circle><circle class="place-disc" r="88"></circle>
+              <g id="robots-red" class="mini-robot-layer"></g>
+              <g class="place-count-badge" transform="translate(-69 66)"><circle r="24"></circle><text id="redBigCount" y="7">13</text></g>
+            </g>
+            <g id="place-green" class="petri-place green-place" transform="translate(680 423)">
+              <circle class="place-halo" r="103"></circle><circle class="place-disc" r="88"></circle>
+              <g id="robots-green" class="mini-robot-layer"></g>
+              <g class="place-count-badge" transform="translate(69 66)"><circle r="24"></circle><text id="greenBigCount" y="7">7</text></g>
+            </g>
+
+            <g id="transition-rb" class="petri-transition target-green" transform="translate(180 245)" tabindex="0" role="button" aria-label="Transition: Rot und Blau werden zweimal Grün">
+              <rect class="transition-hit" x="-43" y="-43" width="86" height="86" rx="12"></rect>
+              <rect class="transition-square" x="-29" y="-29" width="58" height="58" rx="5"></rect>
+              <path class="transition-bolt" d="M5 -18 L-8 2 H2 L-5 19 L13 -5 H3 Z"></path>
+            </g>
+            <g id="transition-gb" class="petri-transition target-red" transform="translate(720 245)" tabindex="0" role="button" aria-label="Transition: Grün und Blau werden zweimal Rot">
+              <rect class="transition-hit" x="-43" y="-43" width="86" height="86" rx="12"></rect>
+              <rect class="transition-square" x="-29" y="-29" width="58" height="58" rx="5"></rect>
+              <path class="transition-bolt" d="M5 -18 L-8 2 H2 L-5 19 L13 -5 H3 Z"></path>
+            </g>
+            <g id="transition-rg" class="petri-transition target-blue" transform="translate(450 575)" tabindex="0" role="button" aria-label="Transition: Rot und Grün werden zweimal Blau">
+              <rect class="transition-hit" x="-43" y="-43" width="86" height="86" rx="12"></rect>
+              <rect class="transition-square" x="-29" y="-29" width="58" height="58" rx="5"></rect>
+              <path class="transition-bolt" d="M5 -18 L-8 2 H2 L-5 19 L13 -5 H3 Z"></path>
+            </g>
+
+            <g id="flowLayer"></g>
+          </svg>
+        </div>
+
+        <div class="petri-level-help">
+          <strong>Diesmal geht es schneller:</strong> Du wählst nicht mehr zwei einzelne Roboter. Klick einfach auf ein <strong>Quadrat</strong>. Es nimmt je einen Roboter aus seinen beiden Eingängen und schickt <strong>zwei</strong> Roboter zur dritten Energie-Farbe.
+        </div>
+
+        <div class="mix-rules" aria-label="Energie-Regeln">
+          <div class="mix-rule"><span class="energy-chip red"></span> + <span class="energy-chip green"></span><span class="energy-arrow">→</span><span class="energy-chip blue"></span><span class="energy-chip blue"></span></div>
+          <div class="mix-rule"><span class="energy-chip red"></span> + <span class="energy-chip blue"></span><span class="energy-arrow">→</span><span class="energy-chip green"></span><span class="energy-chip green"></span></div>
+          <div class="mix-rule"><span class="energy-chip green"></span> + <span class="energy-chip blue"></span><span class="energy-arrow">→</span><span class="energy-chip red"></span><span class="energy-chip red"></span></div>
+        </div>
+
+        <div class="game-footer">
+          <div class="energy-key"><span class="energy-chip red"></span><span><strong id="redFooter">13</strong> rot</span></div>
+          <div class="energy-key"><span class="energy-chip green"></span><span><strong id="greenFooter">7</strong> grün</span></div>
+          <div class="energy-key"><span class="energy-chip blue"></span><span><strong id="blueFooter">3</strong> blau</span></div>
+          <div class="mix-counter">Klicks: <strong id="moveCount">0</strong></div>
+          <button id="profiBtn" class="text-button expert-toggle" type="button" aria-expanded="false">🧠 Expertenmodus</button>
+        </div>
+        <div id="profiBox" class="profi-box expert-box" hidden>
+          <div class="expert-box-head"><span>🧠</span><div><strong>Expertenmodus</strong><small>Petri-Netze, Invarianten und große Zustandsräume</small></div></div>
+          <p><strong>Was lernst du hier?</strong> Du steuerst dieselben Farbregeln jetzt fast direkt als Modell. Viele identische Transitionen hintereinander können sinnvoll sein – entscheidend ist, welchen Gesamtzustand du damit erzeugst.</p>
+          <p><strong>Informatik dahinter:</strong> Die drei Stellen speichern gemeinsam den Zustand als Zahlenvektor. Jede Transition verändert diesen Vektor nach einer festen Regel. Die Gesamtzahl der 23 Token bleibt immer gleich: Das ist bereits eine einfache <strong>Invariante</strong>. Zusätzlich schränkt eine Invariante <strong>modulo 3</strong> ein, welche einfarbigen Endzustände überhaupt erreichbar sind; aus der Startmarkierung kann nur <strong>Blau</strong> alle 23 Token enthalten. Solche Invarianten helfen in der Systemanalyse, unmögliche Zustände zu erkennen, ohne jeden einzelnen Ablauf ausprobieren zu müssen.</p>
+        </div>
+      </section>
+
+      <aside class="robo-card">
+        <div class="robo-top">
+          <div class="avatar-orbit" id="avatarOrbit" data-mood="greeting">
+            <div class="avatar-circle"><div class="avatar-inner" id="avatarInner">
+              <img src="assets/robot/robo-bust.png" alt="Robo, dein Spielbegleiter" />
+              <span class="eyelid eyelid-left" aria-hidden="true"></span><span class="eyelid eyelid-right" aria-hidden="true"></span><span class="mouth-live" aria-hidden="true"></span>
+            </div></div><div class="signal-dot" aria-hidden="true"></div>
+          </div>
+          <div><p class="kicker dark">DEIN SPIELBEGLEITER</p><h2>Robo</h2></div>
+        </div>
+
+        <div class="speech-bubble" id="speechBubble" aria-live="polite">Jetzt steuerst du das Netz direkt. Die Quadrate sind unsere Energie-Schalter. Welcher bringt uns dem Ziel näher?</div>
+
+        <div class="voice-row" id="voiceControls">
+          <button id="speakBtn" class="voice-button" type="button">🔊 Vorlesen</button>
+          <label><input id="autoSpeakToggle" type="checkbox" checked /> automatisch</label>
+          <select id="voiceSelect" aria-label="Deutsche Stimme"></select>
+        </div>
+
+        <div class="robo-actions">
+          <button id="hintBtn" class="primary-button" type="button">💡 Hinweis</button>
+          <button id="explainBtn" class="secondary-button" type="button">Was passiert hier?</button>
+        </div>
+
+        <form id="questionForm" class="question-form">
+          <label for="questionInput">Frag Robo</label>
+          <div class="input-row"><input id="questionInput" type="text" autocomplete="off" placeholder="Zum Beispiel: Welche Transition kann ich klicken?" /><button type="submit" aria-label="Frage senden">→</button></div>
+          <small id="aiStatus">Offline-Robo kennt das Spiel und ein bisschen Smalltalk.</small>
+        </form>
+
+        <div class="strategy-card">
+          <div class="strategy-title">Dein Auftrag</div>
+          <div class="strategy-row"><span>Roboter</span><strong>23</strong></div>
+          <div class="strategy-row"><span>Größte Farbgruppe</span><strong id="groupLabel">13 von 23</strong></div>
+          <div class="strategy-row"><span>3 Sterne</span><strong id="optimalLabel">13 Klicks</strong></div>
+        </div>
+
+        <div class="reward-panel" id="rewardPanel" hidden>
+          <div class="reward-stars" id="rewardStars">★★★</div>
+          <strong>Das große Netz ist gelöst!</strong>
+          <span id="rewardText">Alle 23 Roboter tragen dieselbe Energie.</span>
+          <button id="replayBtn" class="next-button" type="button">Noch einmal spielen</button>
+          <a class="next-button link-button subtle-link" href="index.html#spiele">Zur Spielauswahl →</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <script src="api/tutor-api.js"></script>
+  <script src="js/presentation.js?v=2.4.0"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/level5.js?v=2.4.0"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

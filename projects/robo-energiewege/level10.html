@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Robo und die Energiewege – Robo-Lügendetektor</title>
+  <link rel="stylesheet" href="css/style.css?v=2.4.0">
+</head>
+<body>
+<main class="game-shell">
+  <header class="game-header">
+    <div>
+      <p class="kicker">STROM, WEGE &amp; SCHALTEN</p>
+      <h1>Robo-Lügendetektor</h1>
+      <p class="mission-copy">Ein Energiechip ist verschwunden. Die Roboter geben Hinweise – aber nicht alle sagen die Wahrheit. Finde heraus, wo der Chip steckt.</p>
+    </div>
+    <a class="hub-link" href="index.html#spiele">← Spiele</a>
+    <div class="level-panel" data-difficulty="2" aria-label="Schwierigkeit 2 von 3">
+      <div class="level-row"><span>Schwierigkeit</span><span id="scoreLabel">★★☆</span></div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar" style="width:0%"></div></div>
+    </div>
+  </header>
+
+  <section class="game-grid">
+    <section class="play-card">
+      <div class="card-head">
+        <div><p class="kicker dark">LOGIK-FALL</p><h2 id="logicTask">Wer sagt die Wahrheit?</h2></div>
+        <button id="resetBtn" class="pill-button" type="button">↻ Neu starten</button>
+      </div>
+
+      <div class="liar-stage">
+        <div class="liar-topbar">
+          <div><small>FALL</small><strong id="logicRound">1 von 3</strong></div>
+          <div class="liar-rule"><small>REGEL</small><strong id="liarRule">Genau 1 Robo lügt.</strong></div>
+          <div><small>VERSUCHE</small><strong id="tryCount">0</strong></div>
+        </div>
+
+        <div class="liar-scene">
+          <div class="liar-case-note">
+            <span>🔋</span>
+            <div><strong>Der Energiechip steckt in genau einem Fach.</strong><p id="caseHint">Lies die Aussagen und finde die einzige Möglichkeit, die zur Regel passt.</p></div>
+          </div>
+
+          <div id="robotStatements" class="liar-robots" aria-label="Aussagen der Roboter"></div>
+
+          <div class="locker-section">
+            <div class="locker-heading"><strong>Wo steckt der Energiechip?</strong><span>Klick ein Fach an und teste deine Vermutung.</span></div>
+            <div id="lockerGrid" class="locker-grid"></div>
+          </div>
+
+          <div class="detector-panel">
+            <div class="detector-head"><strong>Logik-Detektor</strong><span id="detectorSummary">Noch keine Vermutung geprüft.</span></div>
+            <div id="detectorLights" class="detector-lights"></div>
+            <button id="checkLogicBtn" class="detector-check" type="button" disabled>Vermutung prüfen</button>
+            <button id="nextLogicBtn" class="detector-next" type="button" hidden>Nächster Fall →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-footer">
+        <span>Du musst nicht raten: Prüfe, welche Aussagen bei deiner Vermutung wahr oder falsch wären.</span>
+        <button id="profiBtn" class="text-button expert-toggle" type="button" aria-expanded="false">🧠 Expertenmodus</button>
+      </div>
+      <div id="profiBox" class="profi-box expert-box" hidden>
+        <div class="expert-box-head"><span>🧠</span><div><strong>Expertenmodus</strong><small>Aussagenlogik, Wahrheit und Bedingungen</small></div></div>
+        <p><strong>Was lernst du hier?</strong> Aussagen können <strong>wahr</strong> oder <strong>falsch</strong> sein. Mit Wörtern wie <strong>NICHT</strong>, <strong>ODER</strong> und <strong>UND</strong> lassen sich mehrere Bedingungen zu einer neuen Aussage verbinden.</p>
+        <p><strong>Informatik dahinter:</strong> Das ist <strong>boolesche Aussagenlogik</strong>. Programme und digitale Schaltungen prüfen ständig Bedingungen wie <code>A UND B</code>, <code>A ODER B</code> oder <code>NICHT A</code>.</p>
+        <p><strong>Warum ist das ein echtes Informatikthema?</strong> Solche Logik steckt in <strong>if-Bedingungen</strong>, Suchfiltern, Datenbanken, Verifikation und Logikgattern. Der Lügendetektor ist im Grunde ein kleines <strong>Constraint-Satisfaction-Problem</strong>: Nur eine Belegung erfüllt alle Regeln.</p>
+      </div>
+    </section>
+
+    <aside class="robo-card">
+      <div class="robo-top">
+        <div class="avatar-orbit" id="avatarOrbit" data-mood="greeting"><div class="avatar-circle"><div class="avatar-inner"><img src="assets/robot/robo-bust.png" alt="Robo"><span class="eyelid eyelid-left"></span><span class="eyelid eyelid-right"></span><span class="mouth-live"></span></div></div><div class="signal-dot"></div></div>
+        <div><p class="kicker dark">DEIN SPIELBEGLEITER</p><h2>Robo</h2></div>
+      </div>
+      <div id="speechBubble" class="speech-bubble">Ein Energiechip ist verschwunden. Lies die Aussagen. Wenn du ein Fach auswählst, kannst du prüfen, wie viele Roboter dann lügen würden.</div>
+      <div class="voice-row" id="voiceControls"><button id="speakBtn" class="voice-button" type="button">🔊 Vorlesen</button><label><input id="autoSpeakToggle" type="checkbox" checked> automatisch</label><select id="voiceSelect"></select></div>
+      <div class="robo-actions"><button id="hintBtn" class="primary-button" type="button">💡 Hinweis</button><button id="explainBtn" class="secondary-button" type="button">Wie prüfe ich eine Aussage?</button></div>
+      <form id="questionForm" class="question-form"><label for="questionInput">Frag Robo</label><div class="input-row"><input id="questionInput" autocomplete="off" placeholder="Zum Beispiel: Was bedeutet ODER?"><button>→</button></div><small id="aiStatus">Offline-Robo kennt das Spiel.</small></form>
+      <div class="strategy-card"><div class="strategy-title">Dein Auftrag</div><div class="strategy-row"><span>Fall</span><strong id="sideLogicRound">1 von 3</strong></div><div class="strategy-row"><span>Gelöst</span><strong id="solvedLogic">0 / 3</strong></div><div class="strategy-row"><span>Hinweise</span><strong id="logicHints">0</strong></div></div>
+      <div id="rewardPanel" class="reward-panel" hidden><div id="rewardStars" class="reward-stars">★★★</div><strong>Logik-Fälle gelöst!</strong><span id="rewardText"></span><button id="replayBtn" class="next-button" type="button">Noch einmal</button><a class="next-button link-button subtle-link" href="index.html#spiele">Zur Spielauswahl</a></div>
+    </aside>
+  </section>
+</main>
+<script src="api/tutor-api.js"></script><script src="js/presentation.js?v=2.4.0"></script><script src="js/progress.js"></script><script src="js/binary-common.js?v=2.4.0"></script><script src="js/level10.js?v=2.4.0"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

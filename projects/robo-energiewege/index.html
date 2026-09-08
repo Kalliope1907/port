@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robo und die Energiewege</title>
+  <link rel="stylesheet" href="css/style.css?v=2.4.0" />
+</head>
+<body class="start-page">
+  <header class="start-nav">
+    <a class="start-brand" href="index.html" aria-label="Robo und die Energiewege – Startseite">
+      <span class="start-brand-bolt">⚡</span><span>Robo und die Energiewege</span>
+    </a>
+    <nav class="start-nav-links" aria-label="Hauptnavigation">
+      <a class="start-nav-link" href="#spiele">Spiele</a>
+    </nav>
+  </header>
+
+  <main class="start-shell">
+    <section class="start-hero">
+      <div class="start-copy">
+        <p class="kicker">LOGIKSPIELE MIT ROBO</p>
+        <h1>Bring Robos Energiewelt zum Laufen.</h1>
+        <p>Leite Strom, teile Ressourcen und knacke Farb-Puzzles. Hinter jedem Spiel steckt eine echte Idee aus Informatik, Mathematik oder Systemmodellierung.</p>
+
+        <div class="player-name-card">
+          <label for="playerName">Wie heißt du?</label>
+          <div class="player-name-row">
+            <input id="playerName" maxlength="20" autocomplete="given-name" placeholder="Dein Name" />
+            <button id="saveNameBtn" type="button">Merken</button>
+          </div>
+          <small id="playerNameHint">Robo kann dich dann beim Namen ansprechen. Der Name bleibt nur auf diesem Gerät.</small>
+        </div>
+
+        <div class="start-actions">
+          <a class="start-primary" href="#spiele">▶ Spiel auswählen</a>
+          <a id="continueLink" class="start-secondary" href="level1.html">↗ Weiterspielen</a>
+        </div>
+
+        <a class="start-progress-card" href="#spiele" aria-label="Fortschritt bei den Spielen ansehen">
+          <div><strong id="startDone">0 / 4</strong><span>Level geschafft</span></div>
+          <div class="start-progress-divider"></div>
+          <div><strong id="startPerfect">0</strong><span>optimal gelöst</span></div>
+          <span class="start-progress-arrow">↓</span>
+        </a>
+      </div>
+
+      <a class="start-robo-scene" href="#spiele" aria-label="Mit Robo zu den Spielen">
+        <div class="start-orbit" aria-hidden="true"></div>
+        <div class="start-avatar-circle"><img src="assets/robot/robo-bust.png" alt="Robo, dein Spielbegleiter" /></div>
+        <div class="start-bubble" id="startRoboBubble">Such dir eins aus! <span>↓</span></div>
+      </a>
+    </section>
+
+    <section id="spiele" class="start-games-section" aria-labelledby="gamesTitle">
+      <div class="start-section-heading games-heading">
+        <div>
+          <p class="kicker">SPIELE</p>
+          <h2 id="gamesTitle">Was willst du heute knacken?</h2>
+          <p class="games-intro">Die Bilder zeigen die echten Spielszenen. Ein Haken bedeutet geschafft, ein Stern bedeutet optimal gelöst.</p>
+        </div>
+        <div class="games-progress-mini" aria-label="Gesamtfortschritt">
+          <span><b id="gamesDone">0</b> geschafft</span>
+          <span><b id="gamesPerfect">0</b> optimal</span>
+        </div>
+      </div>
+
+      <div class="start-category">
+        <div class="start-category-heading">
+          <span class="category-icon">⚡</span>
+          <div><h3>Strom, Wege &amp; Schalten</h3><p>Stromnetze bauen, günstige Wege finden und knifflige Logikfälle lösen.</p></div>
+        </div>
+        <div class="start-level-grid">
+          <a class="start-level-card" href="level1.html" data-progress-level="level1">
+            <div class="start-level-shot">
+              <img src="assets/previews/level1.png" alt="Spielszene aus Strom für die Roboter" />
+              <span class="start-difficulty" aria-label="Schwierigkeit 2 von 3">★★☆</span>
+            </div>
+            <div class="start-level-copy">
+              <h4>Strom für die Roboter</h4>
+              <div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div>
+            </div>
+          </a>
+
+          <a class="start-level-card" href="level2.html" data-progress-level="level2">
+            <div class="start-level-shot">
+              <img src="assets/previews/level2.svg" alt="Spielszene aus Stromnetz-Debugger" />
+              <span class="start-difficulty" aria-label="Schwierigkeit 2 von 3">★★☆</span>
+            </div>
+            <div class="start-level-copy">
+              <h4>Stromnetz-Debugger</h4>
+              <div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div>
+            </div>
+          </a>
+
+          <a class="start-level-card" href="level9.html" data-progress-level="level9">
+            <div class="start-level-shot">
+              <img src="assets/previews/level9.png" alt="Spielszene aus Der kürzeste Energiepfad" />
+              <span class="start-difficulty" aria-label="Schwierigkeit 2 von 3">★★☆</span>
+            </div>
+            <div class="start-level-copy">
+              <h4>Der kürzeste Energiepfad</h4>
+              <div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div>
+            </div>
+          </a>
+
+          <a class="start-level-card" href="level10.html" data-progress-level="level10">
+            <div class="start-level-shot">
+              <img src="assets/previews/level10.png" alt="Spielszene aus Robo-Lügendetektor" />
+              <span class="start-difficulty" aria-label="Schwierigkeit 2 von 3">★★☆</span>
+            </div>
+            <div class="start-level-copy">
+              <h4>Robo-Lügendetektor</h4>
+              <div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="start-category">
+        <div class="start-category-heading">
+          <span class="category-icon">🔋</span>
+          <div><h3>Teilen &amp; Planen</h3><p>Gemeinsame Energie clever verteilen, ohne andere auszubremsen.</p></div>
+        </div>
+        <div class="start-level-grid">
+          <a class="start-level-card" href="level3.html" data-progress-level="level3">
+            <div class="start-level-shot">
+              <img src="assets/previews/level3.png" alt="Spielszene aus Jeder einmal Energie" />
+              <span class="start-difficulty" aria-label="Schwierigkeit 2 von 3">★★☆</span>
+            </div>
+            <div class="start-level-copy">
+              <h4>Jeder einmal Energie</h4>
+              <div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="start-category">
+        <div class="start-category-heading">
+          <span class="category-icon">🎨</span>
+          <div><h3>Farbenergie</h3><p>Farben verwandeln und mehrere Züge im Voraus planen.</p></div>
+        </div>
+        <div class="start-level-grid">
+          <a class="start-level-card" href="level4.html" data-progress-level="level4">
+            <div class="start-level-shot">
+              <img src="assets/previews/level4.png" alt="Spielszene aus Der Energie-Mix" />
+              <span class="start-difficulty" aria-label="Schwierigkeit 2 von 3">★★☆</span>
+            </div>
+            <div class="start-level-copy">
+              <h4>Der Energie-Mix</h4>
+              <div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div>
+            </div>
+          </a>
+
+          <a class="start-level-card" href="level5.html" data-progress-level="level5">
+            <div class="start-level-shot">
+              <img src="assets/previews/level5.png" alt="Spielszene aus Die große Farbmaschine" />
+              <span class="start-difficulty" aria-label="Schwierigkeit 3 von 3">★★★</span>
+            </div>
+            <div class="start-level-copy">
+              <h4>Die große Farbmaschine</h4>
+              <div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="start-category">
+        <div class="start-category-heading">
+          <span class="category-icon">🔢</span>
+          <div><h3>Codes &amp; Daten</h3><p>Roboter als Bits schalten, Zahlen lesen und geheime Nachrichten dekodieren.</p></div>
+        </div>
+        <div class="start-level-grid">
+          <a class="start-level-card" href="level6.html" data-progress-level="level6">
+            <div class="start-level-shot"><img src="assets/previews/level6.png" alt="Spielszene aus Der Energiecode"><span class="start-difficulty" aria-label="Schwierigkeit 1 von 3">★☆☆</span></div>
+            <div class="start-level-copy"><h4>Der Energiecode</h4><div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div></div>
+          </a>
+          <a class="start-level-card" href="level7.html" data-progress-level="level7">
+            <div class="start-level-shot"><img src="assets/previews/level7.png" alt="Spielszene aus Der Zahlenknacker"><span class="start-difficulty" aria-label="Schwierigkeit 2 von 3">★★☆</span></div>
+            <div class="start-level-copy"><h4>Der Zahlenknacker</h4><div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div></div>
+          </a>
+          <a class="start-level-card" href="level8.html" data-progress-level="level8">
+            <div class="start-level-shot"><img src="assets/previews/level8.png" alt="Spielszene aus Geheime Nachricht"><span class="start-difficulty" aria-label="Schwierigkeit 3 von 3">★★★</span></div>
+            <div class="start-level-copy"><h4>Geheime Nachricht</h4><div class="start-card-progress"><span data-status-done>○ Noch offen</span><span data-status-perfect>☆ Optimal</span></div></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="start-info-section">
+      <div class="start-section-heading">
+        <p class="kicker">SO FUNKTIONIERT'S</p>
+        <h2>Spielen zuerst. Verstehen danach.</h2>
+      </div>
+      <div class="start-about">
+        <div class="start-feature-static">
+          <span class="about-icon">⚡</span><strong>Energie bewegen</strong>
+          <p>Du siehst direkt, welche Wege funktionieren und wo Energie steckenbleibt.</p>
+        </div>
+        <div class="start-feature-static">
+          <span class="about-icon">🧩</span><strong>Logik knacken</strong>
+          <p>Manchmal hilft Ausprobieren. Manchmal musst du mehrere Schritte vorausdenken.</p>
+        </div>
+        <div class="start-feature-static">
+          <span class="about-icon">🧠</span><strong>Expertenmodus</strong>
+          <p>Nach jedem Spiel kannst du entdecken, welche echte Informatik-Idee dahintersteckt.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/progress.js"></script>
+  <script src="js/start.js?v=2.4.0"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

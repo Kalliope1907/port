@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robo und die Energiewege – Jeder einmal Energie</title>
+  <link rel="stylesheet" href="css/style.css?v=2.4.0" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="game-header">
+      <div>
+        <p class="kicker">ROBO UND DIE ENERGIEWEGE</p>
+        <h1>Jeder einmal Energie</h1>
+        <p class="mission-copy">Fünf kleine Roboter teilen sich fünf Energiezellen. Sorge dafür, dass <strong>jeder Roboter mindestens einmal Energie bekommt</strong>.</p>
+      </div>
+      <a class="hub-link" href="index.html#spiele">← Spiele</a>
+      <div class="level-panel" data-difficulty="2" aria-label="Schwierigkeit 2 von 3">
+        <div class="level-row"><span>Schwierigkeit</span><span id="scoreLabel">★★☆</span></div>
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      </div>
+    </header>
+
+    <section class="game-grid">
+      <section class="play-card" aria-labelledby="playTitle">
+        <div class="card-head">
+          <div>
+            <p class="kicker dark">ENERGIE-RING</p>
+            <h2 id="playTitle">Kannst du wirklich alle versorgen?</h2>
+          </div>
+          <div class="card-head-actions">
+            <a class="pill-link" href="index.html#spiele">← Spiele</a>
+            <button id="resetBtn" class="pill-button" type="button">↻ Neu starten</button>
+          </div>
+        </div>
+
+        <div class="game-stage ring-stage" id="gameStage">
+          <svg id="ringBoard" class="board ring-board" viewBox="0 0 900 650" role="img" aria-label="Fünf Roboter in einem Kreis teilen sich Energiezellen">
+            <defs>
+              <filter id="softGlow2" x="-70%" y="-70%" width="240%" height="240%">
+                <feGaussianBlur stdDeviation="5" result="blur" />
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="strongGlow2" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="9" result="blur" />
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <linearGradient id="ringWireGradient" x1="0" x2="1">
+                <stop offset="0" stop-color="#35c7be"/>
+                <stop offset=".48" stop-color="#fff1a1"/>
+                <stop offset="1" stop-color="#35c7be"/>
+              </linearGradient>
+              <radialGradient id="cellGlow" cx="50%" cy="45%" r="62%">
+                <stop offset="0" stop-color="#fff7bd"/>
+                <stop offset=".55" stop-color="#ffd95b"/>
+                <stop offset="1" stop-color="#e5aa17"/>
+              </radialGradient>
+            </defs>
+            <circle class="ring-guide" cx="450" cy="325" r="247" />
+            <g id="wireLayer"></g>
+            <g id="cellLayer"></g>
+            <g id="robotLayer"></g>
+            <g class="ring-center" transform="translate(450 325)">
+              <circle r="83" class="center-disc"/>
+              <text class="center-count" id="centerCount" y="-3">0 / 5</text>
+              <text class="center-label" y="27">versorgt</text>
+              <g id="miniProgress" transform="translate(-50 48)"></g>
+            </g>
+          </svg>
+
+          <div class="mission-tip ring-tip" id="missionTip">Jeder Roboter braucht die <strong>beiden Energiezellen neben sich</strong>. Klick einen Roboter an, um Energie zu nehmen – und später noch einmal, um sie zurückzugeben.</div>
+        </div>
+
+        <div class="game-footer">
+          <div class="energy-key"><span class="key-orb"></span><span>freie Energiezelle</span></div>
+          <div class="energy-key"><span class="key-robot"></span><span>Roboter</span></div>
+          <div class="move-counter">Aktionen: <strong id="moveCount">0</strong></div>
+          <button id="profiBtn" class="text-button expert-toggle" type="button" aria-expanded="false">🧠 Expertenmodus</button>
+        </div>
+        <div id="profiBox" class="profi-box expert-box" hidden>
+          <div class="expert-box-head"><span>🧠</span><div><strong>Expertenmodus</strong><small>Das Five-Philosophers-Problem</small></div></div>
+          <p><strong>Was lernst du hier?</strong> Mehrere Roboter wollen gleichzeitig arbeiten, teilen sich aber knappe Ressourcen. Ein Roboter kann nur laden, wenn beide benachbarten Energiezellen frei sind. Damit geht es um <strong>Nebenläufigkeit, Ressourcenkonflikte und geschickte Reihenfolgen</strong>.</p>
+          <p><strong>Informatik dahinter:</strong> Grundlage ist das berühmte <strong>Dining Philosophers Problem</strong> – auf Deutsch meist „Problem der fünf Philosophen“. Es geht auf Edsger W. Dijkstra zurück und ist ein Klassiker der Informatik. Fünf gleichzeitig laufende Prozesse teilen sich fünf Ressourcen; jeder Prozess benötigt seine beiden Nachbarressourcen. An diesem Modell untersucht man unter anderem <strong>gegenseitigen Ausschluss (Mutual Exclusion), Deadlocks und Starvation</strong> – zentrale Fragen bei Betriebssystemen und parallelen Programmen.</p>
+          <p><strong>Petri-Netz-Sicht:</strong> Die Energiezellen sind gemeinsame Ressourcen. Ein Roboter kann eine Lade-Transition nur ausführen, wenn sein eigener Zustand und beide benötigten Ressourcen markiert sind; beim Freigeben werden diese Ressourcen wieder verfügbar.</p>
+        </div>
+      </section>
+
+      <aside class="robo-card">
+        <div class="robo-top">
+          <div class="avatar-orbit" id="avatarOrbit" data-mood="greeting">
+            <div class="avatar-circle">
+              <div class="avatar-inner" id="avatarInner">
+                <img src="assets/robot/robo-bust.png" alt="Robo, dein Spielbegleiter" />
+                <span class="eyelid eyelid-left" aria-hidden="true"></span>
+                <span class="eyelid eyelid-right" aria-hidden="true"></span>
+                <span class="mouth-live" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="signal-dot" aria-hidden="true"></div>
+          </div>
+          <div>
+            <p class="kicker dark">DEIN SPIELBEGLEITER</p>
+            <h2>Robo</h2>
+          </div>
+        </div>
+
+        <div class="speech-bubble" id="speechBubble" aria-live="polite">
+          Diese fünf Roboter teilen sich ihre Energiezellen. Schaffst du es, dass jeder mindestens einmal leuchtet?
+        </div>
+
+        <div class="voice-row" id="voiceControls">
+          <button id="speakBtn" class="voice-button" type="button">🔊 Vorlesen</button>
+          <label><input id="autoSpeakToggle" type="checkbox" checked /> automatisch</label>
+          <select id="voiceSelect" aria-label="Deutsche Stimme"></select>
+        </div>
+
+        <div class="robo-actions">
+          <button id="hintBtn" class="primary-button" type="button">💡 Hinweis</button>
+          <button id="explainBtn" class="secondary-button" type="button">Was passiert hier?</button>
+        </div>
+
+        <form id="questionForm" class="question-form">
+          <label for="questionInput">Frag Robo</label>
+          <div class="input-row">
+            <input id="questionInput" type="text" autocomplete="off" placeholder="Zum Beispiel: Warum kann der hier nicht laden?" />
+            <button type="submit" aria-label="Frage senden">→</button>
+          </div>
+          <small id="aiStatus">Offline-Robo kennt das Spiel und ein bisschen Smalltalk.</small>
+        </form>
+
+        <div class="strategy-card" id="strategyCard">
+          <div class="strategy-title">Dein Auftrag</div>
+          <div class="strategy-row"><span>Versorgt</span><strong id="servedLabel">0 von 5</strong></div>
+          <div class="strategy-row"><span>Laden gerade</span><strong id="activeLabel">0</strong></div>
+          <div class="strategy-row"><span>3 Sterne</span><strong>8 Aktionen</strong></div>
+        </div>
+
+        <div class="reward-panel" id="rewardPanel" hidden>
+          <div class="reward-stars" id="rewardStars">★★★</div>
+          <strong>Alle fünf hatten Energie!</strong>
+          <span id="rewardText">Du hast die Energiezellen geschickt geteilt.</span>
+          <button id="replayBtn" class="next-button" type="button">Noch einmal – schaffe 8 Aktionen</button>
+          <a class="next-button link-button" href="index.html#spiele">Zur Spielauswahl →</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="api/tutor-api.js"></script>
+  <script src="js/presentation.js?v=2.4.0"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/level3.js?v=2.4.0"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>
