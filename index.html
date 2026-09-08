@@ -847,7 +847,7 @@
             <div class="portfolio-card">
               <div class="single-asset-preview">
                 <img src="assets/roboter-energiewege-preview.png"
-                     alt="Robo-Lügendetektor aus der interaktiven Lernspiel-Sammlung Robo und die Energiewege">
+                     alt="Robo vor leuchtenden Energiewegen und Stationen seiner Spielwelt">
                 <span class="case-badge">10 Logikspiele · HTML5</span>
               </div>
               <div class="card-body">
@@ -858,11 +858,11 @@
                   Ressourcenverteilung und algorithmisches Denken für Kinder erfahrbar.
                 </p>
                 <div class="card-actions">
-                  <a class="card-link" href="projects/robo-energiewege/index.html"
-                     target="_blank" rel="noopener"
-                     aria-label="Robo und die Energiewege in einem neuen Tab starten">
+                  <button type="button" class="card-link"
+                          data-bs-toggle="modal" data-bs-target="#roboModal"
+                          aria-label="Robo und die Energiewege im Portfolio öffnen">
                     Spiel starten
-                  </a>
+                  </button>
                   <button type="button" class="context-link" data-bs-toggle="modal"
                           data-bs-target="#contextModal"
                           data-context-title="Robo und die Energiewege"
@@ -1096,6 +1096,28 @@
           <iframe class="storyline-frame" id="storylineFrame"
                   title="Interaktive Arbeitsprobe Petri Nets Revisited"
                   data-src="projects/petri-nets-revisited/story.html"
+                  src="about:blank" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arbeitsprobe: Robo und die Energiewege im Portfolio-Popup -->
+  <div class="modal fade storyline-modal" id="roboModal" tabindex="-1"
+       aria-labelledby="roboModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="roboModalTitle">Robo und die Energiewege</h2>
+          <button type="button" class="storyline-close" data-bs-dismiss="modal"
+                  aria-label="Spiel schließen und zum Portfolio zurückkehren">
+            ← Zurück zum Portfolio
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe class="storyline-frame"
+                  title="Interaktives Lernspiel Robo und die Energiewege"
+                  data-src="projects/robo-energiewege/index.html"
                   src="about:blank" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
       </div>
@@ -1454,16 +1476,17 @@ Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder G
       document.getElementById("contextDidacticBlock").hidden = !didacticIdea;
     });
 
-    // Storyline erst beim Öffnen laden und beim Schließen vollständig stoppen
-    const storylineModal = document.getElementById("storylineModal");
-    const storylineFrame = document.getElementById("storylineFrame");
+    // Interaktive Arbeitsproben erst beim Öffnen laden und beim Schließen vollständig stoppen
+    document.querySelectorAll(".storyline-modal").forEach(projectModal => {
+      const projectFrame = projectModal.querySelector(".storyline-frame");
 
-    storylineModal.addEventListener("show.bs.modal", () => {
-      storylineFrame.src = storylineFrame.dataset.src;
-    });
+      projectModal.addEventListener("show.bs.modal", () => {
+        projectFrame.src = projectFrame.dataset.src;
+      });
 
-    storylineModal.addEventListener("hidden.bs.modal", () => {
-      storylineFrame.src = "about:blank";
+      projectModal.addEventListener("hidden.bs.modal", () => {
+        projectFrame.src = "about:blank";
+      });
     });
 
     // Navigation nach Klick auf Mobilgeräten automatisch schließen
