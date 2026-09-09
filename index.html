@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Arbeitsproben – Learning Design, interaktive Lernmedien, KI-gestützte Bildgestaltung, technische Umsetzung und Visualisierung">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#111111">
   <title>Julia Fleischer · Learning Design & Development Portfolio</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -709,6 +710,24 @@
       color: var(--text);
     }
 
+    .legal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem 1.25rem;
+    }
+
+    .legal-links a {
+      color: var(--text);
+    }
+
+    .legal-links a:hover {
+      color: var(--accent);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
@@ -1037,9 +1056,14 @@
   </main>
 
   <footer>
-    <div class="container-xl d-flex flex-column flex-md-row justify-content-between gap-2">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between gap-3">
       <span>Julia Fleischer · Learning Design &amp; Development Portfolio</span>
-      <span><a href="mailto:julia-anna.fleischer@pm.me">julia-anna.fleischer@pm.me</a> · 2026</span>
+      <nav class="legal-links" aria-label="Kontakt und rechtliche Informationen">
+        <a href="mailto:julia-anna.fleischer@pm.me">julia-anna.fleischer@pm.me</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <span>2026</span>
+      </nav>
     </div>
   </footer>
 
