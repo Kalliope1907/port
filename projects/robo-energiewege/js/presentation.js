@@ -40,6 +40,26 @@
     if(/(tschüss|tschuess|bis später|bis spaeter)/.test(q))return{message:"Bis später! Ich passe solange auf die Energiezellen auf.",mood:"greeting"};
     return null;
   }
+  function addProjectLegalFooter(){
+    if(document.querySelector('.project-legal-footer'))return;
+    const footer=document.createElement('footer');
+    footer.className='project-legal-footer';
+    const nav=document.createElement('nav');
+    nav.setAttribute('aria-label','Portfolio und rechtliche Informationen');
+    [
+      ['Zum Portfolio','../../index.html'],
+      ['Impressum','../../impressum.html'],
+      ['Datenschutz','../../datenschutz.html']
+    ].forEach(([label,href])=>{
+      const link=document.createElement('a');
+      link.href=href;
+      link.target='_top';
+      link.textContent=label;
+      nav.appendChild(link);
+    });
+    footer.appendChild(nav);
+    document.body.appendChild(footer);
+  }
   class SpeechController{
     constructor({onSpeakingChange=()=>{},autoSpeak=true}={}){this.supported="speechSynthesis" in window&&"SpeechSynthesisUtterance" in window;this.onSpeakingChange=onSpeakingChange;this.autoSpeak=autoSpeak;this.currentText="";this.voices=[];this.selectEl=null;this.hasUserGesture=false;const mark=()=>this.hasUserGesture=true;window.addEventListener("pointerdown",mark,{once:true,capture:true});window.addEventListener("keydown",mark,{once:true,capture:true})}
     init(selectEl){this.selectEl=selectEl;if(!this.supported)return;const refresh=()=>this.populateVoices();speechSynthesis.addEventListener?.("voiceschanged",refresh);refresh()}
@@ -72,5 +92,7 @@
     stop(){if(!this.supported)return;speechSynthesis.cancel();this.onSpeakingChange(false)}
     speak(text=this.currentText,{force=false}={}){if(!this.supported||(!force&&!this.autoSpeak)||(!this.hasUserGesture&&!force))return false;const clean=speechText(text);if(!clean)return false;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(clean);const v=this.voices[Number(this.selectEl?.value||0)];if(v){u.voice=v;u.lang=v.lang}else u.lang="de-DE";u.rate=.92;u.pitch=1.05;u.volume=1;u.onstart=()=>this.onSpeakingChange(true);u.onend=()=>this.onSpeakingChange(false);u.onerror=()=>this.onSpeakingChange(false);speechSynthesis.speak(u);return true}
   }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addProjectLegalFooter,{once:true});
+  else addProjectLegalFooter();
   window.PetriPresentation={formatNotation,speechText,smallTalkReply,SpeechController,getPlayerName,setPlayerName,personalizeMessage,firstVisitIntro};
 })();

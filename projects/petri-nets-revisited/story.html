@@ -11,6 +11,31 @@
   <style>
     html, body { height: 100%; padding: 0; margin: 0 }
     #app { height: 100%; width: 100%; }
+    .portfolio-legal-links {
+      position: fixed;
+      z-index: 2147483646;
+      right: 12px;
+      bottom: 64px;
+      display: flex;
+      gap: 12px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      background: rgba(7, 17, 27, .94);
+      box-shadow: 0 5px 18px rgba(0, 0, 0, .28);
+      font: 600 12px/1.2 Arial, sans-serif;
+    }
+    .portfolio-legal-links a { color: #fff; text-underline-offset: 3px; }
+    .portfolio-legal-links a:hover,
+    .portfolio-legal-links a:focus-visible {
+      color: #69e5dd;
+      outline: 2px solid #69e5dd;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    @media (max-width: 620px) {
+      .portfolio-legal-links { right: 8px; bottom: 58px; gap: 9px; font-size: 11px; }
+    }
   </style>
 
   <script>
@@ -472,6 +497,12 @@
   </script>
 
   
+
+  <nav class="portfolio-legal-links" aria-label="Portfolio und rechtliche Informationen">
+    <a href="../../index.html" target="_top">Portfolio</a>
+    <a href="../../impressum.html" target="_top">Impressum</a>
+    <a href="../../datenschutz.html#formspree" target="_top">Datenschutz</a>
+  </nav>
 
   <link rel="stylesheet" href="html5/data/css/output.min.css" data-noprefix/>
 </body>
