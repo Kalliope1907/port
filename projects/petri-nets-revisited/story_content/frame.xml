@@ -20,7 +20,7 @@
           <option name="logo_enabled" value="true">
             <options>
               <option name="logo_url" />
-              <option name="html5_logo_url" value="mobile/6XzM9ah8Ct5.png" />
+              <option name="html5_logo_url" value="mobile/6rDdQ931REw.png" />
             </options>
           </option>
           <option name="sidebar_enabled" value="true">
@@ -1639,7 +1639,7 @@
   <nav_data>
     <outline>
       <links>
-        <slidelink slideid="_player.6DGJQAohC1r" displaytext="Intro-Szene" expand="true" type="slide" translationId="5gagKn5g9P4">
+        <slidelink slideid="_player.6DGJQAohC1r" displaytext="Intro" expand="true" type="slide" translationId="5gagKn5g9P4">
           <links>
             <slidelink slideid="_player.6DGJQAohC1r.6Cd3fy4BdaW" displaytext="Petri Nets Revisited" expand="false" type="slide" translationId="5dDm50zNLEe" />
             <slidelink slideid="_player.6DGJQAohC1r.62sW9xbc6yS" displaytext="Course map" expand="false" type="slide" translationId="5tTu0SJT0eb" />
@@ -1670,14 +1670,14 @@
             <slidelink slideid="_player.5rnHNkT77CL.6cOAHZlpYPX" displaytext="Key takeaways of this chapter" expand="false" type="slide" translationId="6lOeFC9ONQF" />
           </links>
         </slidelink>
-        <slidelink slideid="_player.64KGU84gOD3" displaytext="Quellenhinweise" expand="true" type="slide" translationId="6KAUeMedW9S">
+        <slidelink slideid="_player.64KGU84gOD3" displaytext="Sources and credits" expand="true" type="slide" translationId="6KAUeMedW9S">
           <links>
             <slidelink slideid="_player.64KGU84gOD3.64lAfqgO9aj" displaytext="Sources and credits" expand="false" type="slide" translationId="6bu0272ssMn" />
           </links>
         </slidelink>
         <slidelink slideid="_player.6LgbRjM0w1y" displaytext="my notes" expand="true" type="slide" translationId="64fBz0uXT8r">
           <links>
-            <slidelink slideid="_player.6LgbRjM0w1y.6q5AresLLY3" displaytext="MY NOTES" expand="false" type="slide" translationId="6VfGX4Egt4A" />
+            <slidelink slideid="_player.6LgbRjM0w1y.6q5AresLLY3" displaytext="my notes" expand="false" type="slide" translationId="6VfGX4Egt4A" />
           </links>
         </slidelink>
         <slidelink slideid="_player.6Jzry7FmWEN" displaytext="Ask / Feedback" expand="true" type="slide" translationId="5qUcDbZKpRu">
