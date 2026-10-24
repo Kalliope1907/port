@@ -1,6 +1,6 @@
 # Julia Sommer · Learning Design & Development
 
-Ich verbinde didaktische Konzeption, interaktive Lernmedien, visuelle Gestaltung und technische Umsetzung. Dieses Portfolio zeigt ausgewählte Arbeitsproben für Tätigkeiten im Learning Design und in der Entwicklung digitaler Lernangebote – von der verständlichen Aufbereitung fachlicher Inhalte bis zur Umsetzung im Browser.
+didaktische Konzeption, interaktive Lernmedien, visuelle Gestaltung und technische Umsetzung. Dieses Portfolio zeigt ausgewählte Arbeitsproben für Tätigkeiten im Learning Design und in der Entwicklung digitaler Lernangebote; von der verständlichen Aufbereitung fachlicher Inhalte bis zur Umsetzung im Browser.
 
 **[Zur Portfolio-Übersicht](https://github.com/Kalliope1907/port/blob/main/index.html)**
 
@@ -16,8 +16,3 @@ Ich verbinde didaktische Konzeption, interaktive Lernmedien, visuelle Gestaltung
 ## Technische Umsetzung
 
 Die Portfolioseite nutzt HTML5, CSS, Bootstrap 5 und Vanilla JavaScript, unterstützt durch ChatGPT und Codex. Die Arbeitsproben ergänzen dieses Spektrum um Storyline 360, Adobe Photoshop, Adobe Illustrator, LaTeX/TikZ und KI-gestützte Bildgestaltung.
-
-## Was diese README ergänzt
-
-Die bisherige Kurzbeschreibung „port / visualizing work“ wird um ein berufliches Profil, konkrete Arbeitsproben und direkte Repository-Links erweitert. Learning Design und interaktive Lernmedien stehen nun im Vordergrund; Gestaltung und technische Umsetzung werden als ergänzende Kompetenzen sichtbar. Berücksichtigt ist auch das [Update vom 10. September 2026](https://github.com/Kalliope1907/port/commit/987699ed3f5a7842aa4b51da8bbb081ac1c7ebd3) mit aktualisiertem Petri-Nets-Export und optimierten Portfolio-Vorschauen.
-
