@@ -1450,3 +1450,175 @@ Ausschlüsse: keine Schulter, keine Kleidung, keine zusätzlichen Objekte oder G
 </body>
 </html>
 
+<script>
+(() => {
+  const translations = {
+    "Zum Hauptinhalt springen": "Skip to main content",
+    "Arbeitsproben": "Selected work",
+    "Technik": "Technology",
+    "Ausgewählte Arbeiten": "Selected work",
+    "Arbeitsproben aus Learning Design, Entwicklung und visueller Gestaltung.": "Work samples in learning design, development and visual design.",
+    "Technische Umsetzung dieser Portfolioseite": "Technical implementation",
+    "Learning Design · Storyline · Petri-Netze": "Learning Design · Storyline · Petri nets",
+    "Learning Design · Logik · Interaktiv": "Learning Design · Logic · Interactive",
+    "KI-Ausgang · Photoshop": "AI source image · Photoshop",
+    "LaTeX · TikZ · Vektorgrafik": "LaTeX · TikZ · Vector graphics",
+    "LaTeX · TikZ · Petri-Netze": "LaTeX · TikZ · Petri nets",
+    "Adobe Illustrator · Fachillustration": "Adobe Illustrator · Technical illustration",
+    "Eigene Handskizze · KI-gestützte Bildgestaltung": "Original hand sketch · AI-assisted visual design",
+    "Illustrator-Fachillustrationen": "Technical Illustrations in Illustrator",
+    "Parametrische Fachgrafiken mit TikZ": "Parametric Technical Graphics with TikZ",
+    "Handskizze · Prompt Design · KI-Bild": "Hand sketch · Prompt design · AI image",
+    "Vom KI-Entwurf zum Konferenzheader": "From AI Draft to Conference Header",
+    "Vom Bleistift zum Bildstil": "From Pencil Sketch to Image Style",
+    "Robo und die Energiewege": "Robo and the Energy Paths",
+    "Didaktisch aufbereitete, englischsprachige Präsentationsfolien zur Prozessmodellierung – hier als gekürzte interaktive Arbeitsprobe.": "Didactically designed English-language slides on process modelling, presented here as a condensed interactive work sample.",
+    "Eine Sammlung browserbasierter Knobelspiele, in denen Kinder Denkweisen aus Logik, Binärcodes und weiteren Informatikthemen spielerisch anwenden.": "A collection of browser-based logic puzzles in which children apply ideas from logic, binary codes and other computer science topics through play.",
+    "Durch Photoshop-Bearbeitung und zeichnerische Eingriffe wurde aus einem KI-Ausgangsbild ein veröffentlichter Konferenzheader.": "An AI-generated source image was developed into a published conference header through Photoshop editing and hand-drawn interventions.",
+    "Fahrrad und Nussknacker wurden in Illustrator nach visuellen Vorlagen konstruiert und für Physikaufgaben um Raster und Kraftvektoren ergänzt.": "A bicycle and a nutcracker were constructed in Illustrator from visual references and extended with grids and force vectors for physics problems.",
+    "Parametrische Diagramme und Fachgrafiken lassen sich mit TikZ präzise, skalierbar und reproduzierbar direkt aus Code erzeugen.": "Parametric diagrams and technical graphics can be generated directly from code with TikZ in a precise, scalable and reproducible way.",
+    "Eine eigene Chamäleon-Skizze bildet die Grundlage für vier KI-generierte visuelle Interpretationen mit kontrollierter Pose und Komposition.": "An original chameleon sketch serves as the basis for four AI-generated visual interpretations with a controlled pose and composition.",
+    "Arbeitsprobe starten": "Open work sample",
+    "Spiel starten": "Start game",
+    "Header ansehen": "View header",
+    "Illustrationen ansehen": "View illustrations",
+    "Code & Ergebnis ansehen": "View code & result",
+    "Prozess & Varianten ansehen": "View process & variations",
+    "Kontext": "Context",
+    "Struktur": "Structure",
+    "Interaktion": "Interaction",
+    "KI-Unterstützung": "AI support",
+    "Impressum": "Legal notice",
+    "Datenschutz": "Privacy policy",
+    "Projektkontext": "Project context",
+    "Ausgangslage": "Starting point",
+    "Entscheidung / Herangehensweise": "Decision / approach",
+    "← Zurück zum Portfolio": "← Back to portfolio",
+    "Schließen": "Close",
+    "Mein Beitrag": "My contribution",
+    "Werkzeuge / Technik": "Tools / techniques",
+    "Einsatz": "Use",
+    "Technischer Mehrwert": "Technical value",
+    "Arbeitsprozess": "Workflow",
+    "Handskizze digitalisieren": "Digitise the hand sketch",
+    "Motiv und Bildaufbau festlegen": "Define subject and composition",
+    "Stil, Licht und Material variieren": "Vary style, lighting and material",
+    "Ergebnisse prüfen und auswählen": "Review and select results",
+    "Beispiel für die Prompt-Logik": "Example prompt logic",
+    "Eigene Skizze · Prompting": "Original sketch · prompting",
+    "Bleistiftzeichnung · Gemini": "Pencil drawing · Gemini",
+    "Manuelle Illustration": "Manual illustration",
+    "Fahrrad · Konstruktion, Bauteile und Kraftvektoren": "Bicycle · construction, components and force vectors",
+    "Nussknacker · 3D-Ausarbeitung und Hebelmodell": "Nutcracker · 3D development and lever model",
+    "Code & Ergebnis ansehen": "View code & result",
+    "Code": "Code",
+    "Vektorausgabe": "Vector output",
+    "Original · Handskizze": "Original · hand sketch",
+    "KI · Fotorealistisch": "AI · photorealistic",
+    "KI · Aquarell": "AI · watercolour",
+    "KI · Risograph": "AI · risograph",
+    "KI · 3D-Materialstudie": "AI · 3D material study",
+    "Veröffentlichten Header auf der PEnGE-Website ansehen ↗": "View the published header on the PEnGE website ↗",
+    "Eigene Ausarbeitung · Komposition, Kontrast und zeichnerische Eingriffe": "Own development · composition, contrast and drawn interventions",
+    "Veröffentlichte Fassung · PEnGE-Workshop 2025": "Published version · PEnGE Workshop 2025"
+  };
+
+  const context = {
+    de: {
+      titles: ["Petri Nets Revisited", "Robo und die Energiewege", "Vom KI-Entwurf zum Konferenzheader", "Illustrator-Fachillustrationen", "Parametrische Fachgrafiken mit TikZ", "Vom Bleistift zum Bildstil"],
+      requirements: [
+        "Abstrakte Modellierungskonzepte sollten in einer eigenständigen, webbasierten Arbeitsprobe schrittweise, visuell und interaktiv zugänglich werden.",
+        "Laufendes, eigenständiges Privatprojekt.",
+        "Für den PEnGE-Workshop 2025 sollte aus einem KI-generierten Clownmotiv ein veröffentlichungsfähiger, prägnanter Website-Header entstehen.",
+        "Für ein Mathematik-/Physik-Testlet wurden Illustrationen eines Fahrrads und eines Nussknackers benötigt.",
+        "Komplexe Fachdiagramme sollen präzise, skalierbar und reproduzierbar statt manuell erstellt werden.",
+        "Aus einer eigenen Handskizze sollten mehrere stilistisch unterschiedliche, aber kompositorisch konsistente Bildvarianten entstehen."
+      ],
+      didactic: [
+        "Die Präsentation zeigt einen fachdidaktischen Ansatz, der die Beziehung zwischen Modell- und Realwelt nutzt, um den Zugang zur Prozessmodellierung zu erleichtern. Die zugehörige Veröffentlichung ist bei Springer erschienen.",
+        "Interessante Zusammenhänge und Rätsel aus der Informatik übersetze ich in Minispiele für Kinder. In der lokalen Version ist der Avatar Robo an eine KI angebunden, die Aufgabenstellungen erklärt und Hinweise anbieten kann.",
+        "Das KI-Motiv diente als Ausgangspunkt; Komposition, Kontrast, Typografie und zeichnerische Details wurden anschließend gezielt in Photoshop ausgearbeitet.",
+        "Die Darstellungen reduzieren irrelevante Details und machen die für die Aufgabenbearbeitung relevanten Bauteile, Raster und Kraftvektoren direkt erkennbar.",
+        "Die konsistente Geometrie erleichtert es, Muster, Ebenen und Beziehungen zu erkennen. Die Grafik lässt sich ohne Qualitätsverlust in Lern- und Fachmaterialien einsetzen.",
+        "Pose, Blickrichtung und Bildaufbau blieben konstant; Medium, Material, Licht und Farbwelt wurden von Variante zu Variante verändert."
+      ]
+    },
+    en: {
+      titles: ["Petri Nets Revisited", "Robo and the Energy Paths", "From AI Draft to Conference Header", "Technical Illustrations in Illustrator", "Parametric Technical Graphics with TikZ", "From Pencil Sketch to Image Style"],
+      requirements: [
+        "Abstract modelling concepts needed to become accessible step by step in a self-contained, web-based, visual and interactive work sample.",
+        "Ongoing independent private project.",
+        "For the 2025 PEnGE workshop, an AI-generated clown motif needed to become a concise, publishable website header.",
+        "A mathematics/physics testlet required illustrations of a bicycle and a nutcracker.",
+        "Complex technical diagrams should be created precisely, scalably and reproducibly rather than manually.",
+        "One original sketch needed to produce several stylistically distinct but compositionally consistent image variations."
+      ],
+      didactic: [
+        "The presentation uses the relationship between model and real world as a didactic bridge into process modelling. The related publication appeared with Springer.",
+        "I translate interesting connections and puzzles from computer science into mini-games for children. In the local version, the avatar Robo is connected to an AI that explains tasks and can offer hints.",
+        "The AI motif served as a starting point; composition, contrast, typography and drawn details were then deliberately developed in Photoshop.",
+        "The illustrations reduce irrelevant detail and make the components, grids and force vectors relevant to solving the tasks immediately recognisable.",
+        "Consistent geometry makes patterns, levels and relationships easier to recognise. The graphic can be used in learning and technical materials without loss of quality.",
+        "Pose, viewing direction and composition remained constant; medium, material, lighting and colour palette changed from one variation to the next."
+      ]
+    }
+  };
+
+  const nodes = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let node;
+  while (node = walker.nextNode()) {
+    const key = node.nodeValue.trim().replace(/\s+/g, " ");
+    if (key) nodes.push({ node, raw: node.nodeValue, key });
+  }
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = "EN";
+  button.style.cssText = "min-height:38px;margin:.35rem 0 0 .5rem;border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:.3rem .7rem;background:transparent;color:#f1eee9;font:inherit;font-size:.78rem;font-weight:700;letter-spacing:.08em;cursor:pointer";
+  const item = document.createElement("li");
+  item.className = "nav-item";
+  item.append(button);
+  document.querySelector(".navbar-nav").append(item);
+
+  function applyLanguage(language) {
+    nodes.forEach(({ node, raw, key }) => {
+      const replacement = language === "en" ? translations[key] || key : key;
+      if (language === "en") {
+        const leading = raw.match(/^\s*/)[0];
+        const trailing = raw.match(/\s*$/)[0];
+        node.nodeValue = leading + replacement + trailing;
+      } else {
+        node.nodeValue = raw;
+      }
+    });
+    document.documentElement.lang = language;
+    document.title = "Julia Sommer · Learning Design & Development Portfolio";
+    document.querySelector('meta[name="description"]').content = language === "en"
+      ? "Selected work samples in learning design, interactive learning media, AI-assisted visual design, technical implementation and visualisation"
+      : "Arbeitsproben – Learning Design, interaktive Lernmedien, KI-gestützte Bildgestaltung, technische Umsetzung und Visualisierung";
+    button.textContent = language === "en" ? "DE" : "EN";
+    button.setAttribute("aria-label", language === "en" ? "Auf Deutsch umschalten" : "Switch to English");
+    document.querySelectorAll(".context-link").forEach((trigger, index) => {
+      trigger.dataset.contextTitle = context[language].titles[index];
+      trigger.dataset.requirement = context[language].requirements[index];
+      trigger.dataset.didactic = context[language].didactic[index];
+    });
+    localStorage.setItem("portfolio-language", language);
+  }
+
+  const initialLanguage = new URLSearchParams(location.search).get("lang") === "en"
+    || (!new URLSearchParams(location.search).has("lang") && localStorage.getItem("portfolio-language") === "en")
+    ? "en" : "de";
+  applyLanguage(initialLanguage);
+
+  button.addEventListener("click", () => {
+    const nextLanguage = document.documentElement.lang === "de" ? "en" : "de";
+    applyLanguage(nextLanguage);
+    const url = new URL(location.href);
+    if (nextLanguage === "en") url.searchParams.set("lang", "en");
+    else url.searchParams.delete("lang");
+    history.replaceState({}, "", url);
+  });
+})();
+</script>
